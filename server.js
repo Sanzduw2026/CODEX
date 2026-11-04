@@ -17,6 +17,7 @@ const {
 const PORT = Number.parseInt(process.env.PORT || '4173', 10);
 const HOST = process.env.HOST || '0.0.0.0';
 const PUBLIC_DIR = path.join(__dirname, 'public');
+const ASSETS_DIR = path.join(__dirname, 'assets');
 
 const MIME = {
   '.html': 'text/html; charset=utf-8',
@@ -25,6 +26,7 @@ const MIME = {
   '.json': 'application/json; charset=utf-8',
   '.svg': 'image/svg+xml',
   '.png': 'image/png',
+  '.jpg': 'image/jpeg',
   '.ico': 'image/x-icon',
 };
 
@@ -53,9 +55,17 @@ function sendFile(res, filePath) {
 }
 
 function serveStatic(req, res, pathname) {
-  const rel = pathname === '/' ? 'index.html' : decodeURIComponent(pathname).replace(/^\/+/, '');
-  const resolved = path.resolve(PUBLIC_DIR, rel);
-  if (!resolved.startsWith(PUBLIC_DIR + path.sep) && resolved !== path.join(PUBLIC_DIR, 'index.html')) {
+  let baseDir = PUBLIC_DIR;
+  let rel = pathname === '/' ? 'index.html' : decodeURIComponent(pathname).replace(/^\/+/, '');
+
+  // Aset sosial (og-image) disimpan di assets/, di luar public/.
+  if (rel.startsWith('assets/')) {
+    baseDir = ASSETS_DIR;
+    rel = rel.slice('assets/'.length);
+  }
+
+  const resolved = path.resolve(baseDir, rel);
+  if (!resolved.startsWith(baseDir + path.sep) && resolved !== path.join(PUBLIC_DIR, 'index.html')) {
     res.writeHead(403, { 'content-type': 'text/plain; charset=utf-8' });
     res.end('403 — akses ditolak');
     return;

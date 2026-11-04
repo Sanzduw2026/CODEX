@@ -80,6 +80,22 @@ test('path traversal ditolak', async () => {
   assert.ok([403, 404].includes(res.status));
 });
 
+test('gambar sosial tersaji dari folder assets', async () => {
+  const res = await fetch(`${base}/assets/og-image.svg`);
+  assert.equal(res.status, 200);
+  assert.match(res.headers.get('content-type'), /image\/svg\+xml/);
+  const svg = await res.text();
+  assert.ok(svg.includes('<svg'));
+  assert.ok(svg.includes('Ide Codex'));
+  const total = require('../lib/ideas').loadIdeas().length;
+  assert.ok(svg.includes(`${total} ide proyek OpenAI/Codex`), 'jumlah ide di gambar usang');
+});
+
+test('aset di luar assets/ tidak bocor', async () => {
+  const res = await fetch(`${base}/assets/..%2fpackage.json`);
+  assert.ok([403, 404].includes(res.status));
+});
+
 test('/healthz hidup', async () => {
   const res = await fetch(`${base}/healthz`);
   assert.equal(res.status, 200);

@@ -1,0 +1,44 @@
+[
+  {
+    "id": "i18n-pipeline",
+    "title": "Pipeline Lokalisasi Aplikasi",
+    "tagline": "Rilis multibahasa tanpa tombol 'belum diterjemahkan'.",
+    "category": "Lokalisasi & Konten",
+    "difficulty": "Pemula–Menengah",
+    "timeframe": "2 minggu",
+    "summary": "Alur otomatis yang mengambil string baru dari kode, menerjemahkan dengan konteks (screenshot + catatan developer), menjaga variabel dan panjang teks, lalu membuat PR berisi file locale yang siap direview.",
+    "why": "Masalah nyata setiap produk yang tumbuh, dan latihan bagus untuk menjaga format terstruktur + validasi otomatis sebelum PR dibuat.",
+    "stack": [
+      "Node.js",
+      "GitHub Actions",
+      "React",
+      "i18next"
+    ],
+    "openaiFeatures": [
+      "Structured Outputs",
+      "Prompt caching",
+      "Batch API"
+    ],
+    "mvp": [
+      "Ekstraksi string + konteks dari komponen",
+      "Terjemahan yang mempertahankan placeholder & plural",
+      "Validasi: placeholder utuh, panjang tidak melebihi 140%",
+      "PR otomatis per bahasa dengan diff terperinci"
+    ],
+    "stretch": [
+      "Deteksi string usang",
+      "Glosarium produk otomatis",
+      "Mode review untuk penerjemah manusia"
+    ],
+    "metrics": [
+      "100% placeholder utuh",
+      "≥ 90% string lolos review manusia",
+      "Biaya < $0.01 per 100 string"
+    ],
+    "risks": [
+      "Terjemahan tanpa konteks terasa kaku",
+      "Bahasa dengan bentuk plural berbeda"
+    ],
+    "prompt": "Terjemahkan string UI ini ke bahasa target. Pertahankan placeholder {seperti_ini} dan tag HTML. Gunakan konteks layar yang diberikan. Jika string ambigu, kembalikan status='perlu_konteks'."
+  }
+]

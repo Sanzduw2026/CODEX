@@ -1,191 +1,192 @@
 # Brief Proyek OpenAI / Codex
 
-Dibuat: 2026-11-04T03:42:19.773Z
+Dibuat: 2026-11-04T03:50:40.861Z
 Jumlah ide: 3
 
 ---
 
-# Screenshot → Aplikasi Jalan (screenshot-to-app)
+# Monitor Biaya & Latensi LLM (llm-cost-latency-monitor)
 
-> Dari gambar desain ke komponen React yang bisa dites.
+> Tagihan bulanan tidak boleh jadi kejutan.
 
-**Kategori:** Codex / Developer Tools  
-**Tingkat:** Menengah  
-**Estimasi:** 3 minggu
-
-## Ringkasan
-
-Pipeline yang mengubah screenshot UI menjadi komponen React + Tailwind, lengkap dengan test visual: render ulang, bandingkan screenshot, dan iterasi sampai selisih pixel di bawah ambang.
-
-## Kenapa layak dikerjakan
-
-Memaksa loop agent yang benar-benar tertutup: generate → render → ukur → perbaiki. Skill yang sama dipakai untuk semua tugas coding agent.
-
-## Stack
-
-- TypeScript
-- Playwright
-- Vite
-- Codex CLI
-
-## Kemampuan OpenAI yang dipakai
-
-- Vision input
-- Codex CLI
-- Structured Outputs
-
-## Cakupan MVP
-
-1. Ekstraksi layout & design token kasar dari gambar
-2. Generate komponen + storybook/story per komponen
-3. Render headless, diff screenshot, hitung skor kemiripan
-4. Maksimal N iterasi perbaikan dengan riwayat diff
-
-## Pengembangan lanjutan
-
-- Mode responsif (mobile/desktop)
-- Ekstraksi aset & ikon otomatis
-- Ekspor ke shadcn/ui
-
-## Target terukur
-
-- [ ] Skor kemiripan ≥ 0.9 pada 10 desain uji
-- [ ] Semua komponen punya test render
-- [ ] < 5 iterasi rata-rata
-
-## Risiko & cara meredamnya
-
-- Desain ambigu/bergerak
-- Font & aset tidak tersedia
-
-## Prompt awal (system)
-
-```text
-Bandingkan dua screenshot. Daftar perbedaan visual yang terlihat (spacing, ukuran font, warna, radius, alignment) dalam JSON, urut dari yang paling mengganggu. Jangan menyarankan perbaikan CSS dulu.
-```
-
----
-
-# Migration Copilot (v1 → v2) (migration-copilot)
-
-> Refactor berskala repo dengan bukti di setiap langkah.
-
-**Kategori:** Codex / Developer Tools  
-**Tingkat:** Lanjutan  
-**Estimasi:** 4 minggu
+**Kategori:** Evaluasi & Observability  
+**Tingkat:** Pemula–Menengah  
+**Estimasi:** 2 minggu
 
 ## Ringkasan
 
-Alat untuk memigrasikan pola kode lama ke API baru (mis. kelas komponen → hooks, callback → async/await) di banyak file: inventaris, rencana per file, patch kecil yang bisa diverifikasi test, dan laporan progres.
+Proxy ringan di depan API model yang mencatat token, biaya, latensi per fitur/pengguna, mendeteksi pemakaian anomali, dan menegakkan anggaran per tim sebelum tagihan membengkak.
 
 ## Kenapa layak dikerjakan
 
-Kasus terbaik untuk agentic coding: banyak file, aturan jelas, verifikasi otomatis lewat test.
-
-## Stack
-
-- TypeScript
-- ts-morph
-- Codex CLI
-- GitHub Actions
-
-## Kemampuan OpenAI yang dipakai
-
-- Codex CLI
-- Batch API
-- Structured Outputs
-
-## Cakupan MVP
-
-1. Aturan migrasi deklaratif (pola → transformasi)
-2. Deteksi otomatis file terdampak + estimasi kesulitan
-3. Patch per file; jalankan test/lint sebelum & sesudah
-4. Dry-run mode yang hanya menulis laporan
-
-## Pengembangan lanjutan
-
-- Rollback otomatis jika test merah
-- Prioritas file berdasarkan traffic
-- Codemod deterministik untuk pola umum
-
-## Target terukur
-
-- [ ] ≥ 70% file termigrasi otomatis
-- [ ] CI hijau di setiap PR
-- [ ] 0 perubahan di luar cakupan
-
-## Risiko & cara meredamnya
-
-- Perubahan semi-otomatis sulit direview
-- Test coverage rendah menyembunyikan regresi
-
-## Prompt awal (system)
-
-```text
-Terapkan aturan migrasi berikut pada file ini. Ubah seminimal mungkin. Jika tidak yakin atau butuh konteks file lain, kembalikan status='perlu_manual' beserta alasan. Jangan mengubah perilaku publik.
-```
-
----
-
-# Codex Repo Onboarding Copilot (codex-repo-onboarding)
-
-> Ubah repo asing jadi peta pengetahuan dalam 5 menit.
-
-**Kategori:** Codex / Developer Tools  
-**Tingkat:** Menengah  
-**Estimasi:** 2–3 minggu
-
-## Ringkasan
-
-CLI + web report yang membaca sebuah repositori, memetakan arsitektur, titik masuk, alur data, dan 'jebakan' (config tersembunyi, migrasi DB, env wajib), lalu menulis dokumen onboarding yang bisa dibaca manusia dan dipakai ulang oleh Codex sebagai konteks.
-
-## Kenapa layak dikerjakan
-
-Onboarding repo adalah tugas pertama yang paling sering diminta ke Codex. Output yang terstruktur (bukan chat) membuat hasilnya bisa direview tim dan dipakai ulang.
+Masalah pertama aplikasi AI setelah diluncurkan biasanya biaya, bukan kualitas. Alat ini kecil tapi langsung dipakai.
 
 ## Stack
 
 - Node.js
-- TypeScript
-- Codex CLI
-- SQLite
-- Mermaid
+- ClickHouse
+- Grafana
+- Docker
 
 ## Kemampuan OpenAI yang dipakai
 
-- Codex CLI
-- Structured Outputs
-- Embeddings
+- Responses API
 - Prompt caching
+- Batch API
+- Token counting
 
 ## Cakupan MVP
 
-1. Index file kunci: manifest, entrypoint, CI, migrasi, env example
-2. Ringkas tiap modul + diagram arsitektur Mermaid
-3. Generate ONBOARDING.md + 'first tasks' untuk kontributor baru
-4. Skor keyakinan per klaim, tandai bagian yang perlu dicek manusia
+1. Proxy transparan + atribusi biaya per fitur/pengguna
+2. Anggaran harian/bulanan dengan hard stop dan alert
+3. Deteksi anomali biaya (z-score sederhana)
+4. Dashboard p50/p95 latensi dan rasio cache hit
 
 ## Pengembangan lanjutan
 
-- Watch mode: perbarui dokumen saat PR merge
-- Band context per modul agar hemat token
-- Reviewer mode: bandingkan dokumen vs kode terkini
+- Saran rute model lebih murah berdasarkan data nyata
+- Simulasi tagihan sebelum rilis fitur
+- Ekspor laporan ke Slack mingguan
 
 ## Target terukur
 
-- [ ] Waktu onboarding < 10 menit
-- [ ] ≥ 80% klaim diverifikasi benar
-- [ ] Biaya analisis < $0.05 per repo
+- [ ] Overhead < 25 ms p95
+- [ ] Selisih hitungan biaya < 3%
+- [ ] Anggaran terlampaui tertahan 100%
 
 ## Risiko & cara meredamnya
 
-- Repo besar bisa melebihi konteks
-- Klaim halusinasi soal perilaku runtime
+- Token estimation tidak akurat
+- Proxy menjadi single point of failure
 
 ## Prompt awal (system)
 
 ```text
-Kamu adalah arsitek perangkat lunak. Dari daftar file dan isi modul yang saya berikan, hasilkan ringkasan arsitektur dalam JSON: entrypoints, modules, dataFlow, risks, openQuestions. Setiap klaim harus menyertakan file sebagai bukti.
+Dari log permintaan ini, hitung perkiraan biaya berdasarkan tabel harga yang diberikan. Kembalikan JSON {inputTokens, cachedTokens, outputTokens, costUsd, notes}. Jika model tidak ada di tabel, kembalikan costUsd=null.
+```
+
+---
+
+# Pembuat Kuis Kurikulum Sekolah (school-quiz-generator)
+
+> Soal bertingkat dari materi guru, lengkap dengan kunci dan pembahasan.
+
+**Kategori:** Edukasi  
+**Tingkat:** Pemula–Menengah  
+**Estimasi:** 2 minggu
+
+## Ringkasan
+
+Guru mengunggah materi (PDF/slide), sistem menghasilkan paket soal dengan tingkat kesulitan berlapis, kunci jawaban, pembahasan, dan varian A/B untuk mencegah contekan — dengan biaya per paket yang sangat kecil.
+
+## Kenapa layak dikerjakan
+
+Pengguna jelas (guru), waktu yang dihemat nyata, dan cocok untuk menunjukkan Batch API + caching untuk menekan biaya di skala sekolah.
+
+## Stack
+
+- Python
+- FastAPI
+- PostgreSQL
+- React
+
+## Kemampuan OpenAI yang dipakai
+
+- Batch API
+- Structured Outputs
+- Prompt caching
+- Embeddings
+
+## Cakupan MVP
+
+1. Impor materi dan ekstraksi konsep kunci
+2. Generate paket soal: mudah/sedang/sulit + pembahasan
+3. Validasi otomatis: tidak ada soal duplikat, kunci konsisten
+4. Ekspor DOCX/PDF siap cetak
+
+## Pengembangan lanjutan
+
+- Varian soal per siswa dari bank yang sama
+- Analitik butir soal (tingkat kesulitan nyata)
+- Umpan balik otomatis untuk jawaban esai
+
+## Target terukur
+
+- [ ] Biaya < $0.02 per paket 20 soal
+- [ ] ≥ 95% soal lolos validasi otomatis
+- [ ] Guru hanya mengedit < 20% soal
+
+## Risiko & cara meredamnya
+
+- Soal ambigu atau kunci salah
+- Materi berhak cipta
+
+## Prompt awal (system)
+
+```text
+Buat soal pilihan ganda untuk konsep berikut pada level yang diminta. Setiap soal: pertanyaan, 4 opsi, kunci, pembahasan 2 kalimat, dan konsep yang diuji. Hindari jebakan yang menguji bacaan, bukan pemahaman.
+```
+
+---
+
+# Tanya Dokumen, Dapat Kutipan (doc-qa-citations)
+
+> RAG yang menolak menjawab kalau tidak ada bukti.
+
+**Kategori:** RAG & Knowledge  
+**Tingkat:** Pemula–Menengah  
+**Estimasi:** 2 minggu
+
+## Ringkasan
+
+Sistem tanya-jawab di atas kumpulan dokumen internal (PDF, Markdown, Notion export) yang selalu menampilkan kutipan halaman/paragraf, dan menjawab 'tidak tahu' ketika bukti tidak cukup.
+
+## Kenapa layak dikerjakan
+
+Proyek RAG klasik, tetapi fokus pada bagian yang paling sering diabaikan: sitasi yang benar dan penolakan yang jujur.
+
+## Stack
+
+- Python
+- FastAPI
+- pgvector
+- Next.js
+
+## Kemampuan OpenAI yang dipakai
+
+- Embeddings
+- Responses API
+- Structured Outputs
+- File Search
+
+## Cakupan MVP
+
+1. Ingest + chunking sadar-struktur (heading, tabel)
+2. Hybrid search (BM25 + vektor) dengan rerank
+3. Jawaban wajib JSON: {answer, citations[], confidence}
+4. Halaman evaluasi: ukur faithfulness & citation accuracy
+
+## Pengembangan lanjutan
+
+- Multi-dokumen dengan ACL per pengguna
+- Highlight kutipan langsung di PDF viewer
+- Cache semantik untuk pertanyaan berulang
+
+## Target terukur
+
+- [ ] Citation accuracy ≥ 95%
+- [ ] Penolakan tepat pada 20 pertanyaan jebakan
+- [ ] p95 latensi < 3 s
+
+## Risiko & cara meredamnya
+
+- Chunk memotong konteks penting
+- Dokumen usang
+
+## Prompt awal (system)
+
+```text
+Jawab HANYA dari konteks yang diberikan. Sertakan id kutipan untuk setiap klaim. Jika konteks tidak memadai, kembalikan answer=null dan alasan singkat. Jangan menebak.
 ```
 
 ---

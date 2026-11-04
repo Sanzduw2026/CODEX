@@ -1,6 +1,6 @@
 # Ide Codex — generator ide proyek OpenAI acak
 
-Repo ini bukan kumpulan tautan. Isinya **mesin ide**: 14 ide proyek OpenAI/Codex yang sudah dipikirkan
+Repo ini bukan kumpulan tautan. Isinya **mesin ide**: 26 ide proyek OpenAI/Codex yang sudah dipikirkan
 sampai level MVP, bisa diputar acak lewat UI atau CLI, difilter, lalu diekspor menjadi brief Markdown/JSON/CSV
 yang siap kamu bawa ke Codex atau ke dokumen perencanaan.
 
@@ -18,7 +18,7 @@ Tanpa dependensi eksternal. Tanpa API key. Cukup Node.js 18+.
 
 ```bash
 git clone <repo-ini> && cd CODEX
-npm test          # 20 test, tanpa dependensi
+npm test          # 27 test, tanpa dependensi
 npm start         # UI di http://localhost:4173
 node cli.js       # satu ide acak di terminal
 ```
@@ -87,23 +87,37 @@ curl -o brief.md "http://localhost:4173/api/export?format=md&count=3"
 ## Struktur repo
 
 ```
-data/ideas.json      sumber data ide (satu-satunya tempat mengedit konten)
-lib/ideas.js         validasi data, filter, pemilihan acak, ekspor markdown/csv
-cli.js               antarmuka terminal
-server.js            server HTTP tanpa dependensi (API + static)
-public/              UI: index.html, styles.css, app.js
-tests/               node:test untuk data, lib, CLI, dan API
-docs/contoh-brief.md contoh hasil ekspor
+data/ideas/           satu berkas JSON per kategori — sumber tunggal konten (11 berkas)
+lib/ideas.js          validasi, filter, pemilihan acak, ekspor markdown/csv
+cli.js                antarmuka terminal
+server.js             server HTTP tanpa dependensi (API + static)
+public/               UI: index.html, styles.css, app.js
+scripts/aplikasi.js   generator dokumen aplikasi program Codex for Open Source
+tests/                node:test untuk data, lib, CLI, API, dan isi dokumen aplikasi
+docs/contoh-brief.md  contoh hasil ekspor
 ```
 
 ## Menambah ide baru
 
-1. Tambahkan objek ke `data/ideas.json` (semua field wajib, `id` berupa slug huruf kecil).
-2. `npm test` — validasi akan menolak field hilang, duplikat id, atau tingkat yang tidak dikenal.
+1. Tambahkan objek ke berkas kategori di `data/ideas/` (semua field wajib, `id` berupa slug huruf kecil).
+   Satu berkas = satu kategori. Kategori baru cukup membuat berkas baru.
+2. `npm test` — validasi menolak field hilang, duplikat id, kategori campur, atau tingkat yang tidak dikenal.
 3. Kategori baru otomatis muncul di UI dan CLI.
+
+Panduan lengkap + standar penulisan: **[CONTRIBUTING.md](CONTRIBUTING.md)**.
 
 Aturan penulisan yang saya pakai: **satu ide = satu alur pengguna utama**, metrik harus bisa diukur
 (angka, persentase, atau batas biaya), dan risiko harus spesifik — bukan "bisa gagal".
+
+## Komunitas & kebijakan
+
+| Berkas | Isi |
+|---|---|
+| [CONTRIBUTING.md](CONTRIBUTING.md) | Cara menambah ide, standar penulisan, alur review |
+| [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md) | Perilaku yang diharapkan dan cara melapor |
+| [SECURITY.md](SECURITY.md) | Melaporkan kerentanan, model ancaman, saran deploy |
+| [docs/aplikasi-codex-oss.md](docs/aplikasi-codex-oss.md) | Kit aplikasi program *Codex for Open Source* (6 bulan ChatGPT Pro) |
+| `.github/workflows/` | CI (Node 18/20/22) + validasi data pada PR |
 
 ## Catatan
 

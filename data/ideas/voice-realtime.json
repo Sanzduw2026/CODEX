@@ -1,0 +1,88 @@
+[
+  {
+    "id": "realtime-voice-receptionist",
+    "title": "Resepsionis Suara Real-time",
+    "tagline": "Asisten telepon yang bisa memesan, menjadwalkan, dan mengalihkan ke manusia.",
+    "category": "Voice & Realtime",
+    "difficulty": "Lanjutan",
+    "timeframe": "4 minggu",
+    "summary": "Aplikasi voice agent untuk bisnis kecil (klinik, barbershop, restoran): menerima panggilan, memahami intent, cek ketersediaan slot, dan membuat reservasi. Handoff ke manusia saat keyakinan rendah atau permintaan sensitif.",
+    "why": "Latensi percakapan adalah tantangan engineering nyata: barge-in, VAD, state percakapan, dan fallback yang tidak terasa kaku.",
+    "stack": [
+      "Node.js",
+      "WebRTC",
+      "Next.js",
+      "Redis",
+      "SQLite"
+    ],
+    "openaiFeatures": [
+      "Realtime API",
+      "Audio streaming",
+      "Function calling",
+      "Transcription"
+    ],
+    "mvp": [
+      "Alur reservasi dengan tool: cek slot, buat booking, kirim konfirmasi",
+      "Kalender sederhana + aturan bisnis (jam buka, durasi layanan)",
+      "Deteksi barge-in dan pemulihan saat user memotong",
+      "Log transkrip + ringkasan panggilan otomatis"
+    ],
+    "stretch": [
+      "Multi-bahasa (ID/EN) dengan deteksi otomatis",
+      "Analitik: intent gagal terbanyak",
+      "Escalation berbasis sentimen"
+    ],
+    "metrics": [
+      "Latensi balas < 800 ms p95",
+      "≥ 70% panggilan uji selesai tanpa manusia",
+      "0 double-booking"
+    ],
+    "risks": [
+      "Kualitas audio jaringan buruk",
+      "Data pribadi dalam rekaman suara"
+    ],
+    "prompt": "Kamu resepsionis ramah dan efisien. Tujuan: kumpulkan layanan, tanggal, jam, nama, dan nomor telepon. Ajukan satu pertanyaan per giliran. Jika user marah atau minta manusia, segera panggil tool escalate_to_human."
+  },
+  {
+    "id": "offline-meeting-notes",
+    "title": "Notulen Rapat Privat (Offline-first)",
+    "tagline": "Transkripsi di perangkat, ringkasan di server — data kendali pengguna.",
+    "category": "Voice & Realtime",
+    "difficulty": "Lanjutan",
+    "timeframe": "3–4 minggu",
+    "summary": "Rekaman rapat diproses lokal bila memungkinkan: transkripsi on-device, redaksi nama & angka sensitif sebelum dikirim, lalu ringkasan dan action item dibuat di cloud. Setiap bagian jelaskan data apa yang keluar dari perangkat.",
+    "why": "Privasi adalah alasan utama organisasi menolak alat AI. Arsitektur hibrida ini menunjukkan pemahaman yang jarang ada di proyek portofolio.",
+    "stack": [
+      "Electron",
+      "Python",
+      "whisper.cpp",
+      "FastAPI"
+    ],
+    "openaiFeatures": [
+      "Transcription",
+      "Structured Outputs",
+      "Responses API"
+    ],
+    "mvp": [
+      "Transkripsi lokal dengan penanda pembicara kasar",
+      "Redaksi otomatis entitas sensitif + pratinjau sebelum kirim",
+      "Ringkasan keputusan + action item dengan kutipan",
+      "Panel transparansi: apa yang diproses lokal vs cloud"
+    ],
+    "stretch": [
+      "Pencarian lintas rapat tanpa mengunggah audio",
+      "Template notulen per jenis rapat",
+      "Ekspor ke Notion/Linear"
+    ],
+    "metrics": [
+      "≥ 95% entitas sensitif teredaksi",
+      "WER transkripsi < 15% pada audio jernih",
+      "0 audio mentah terunggah tanpa izin"
+    ],
+    "risks": [
+      "Kinerja perangkat rendah",
+      "Redaksi berlebihan membuat ringkasan ambigu"
+    ],
+    "prompt": "Dari transkrip teredaksi, hasilkan JSON {decisions[], actions[{title, owner, dueDate, quote}], openQuestions[]}. Gunakan hanya informasi dalam transkrip. Tandai item yang bukti kutipannya lemah."
+  }
+]

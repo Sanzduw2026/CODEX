@@ -2,18 +2,31 @@
   "name": "ide-codex",
   "version": "1.0.0",
   "private": true,
-  "description": "Generator ide proyek OpenAI/Codex secara acak — data terkurasi, CLI, API lokal, dan UI tanpa dependensi.",
+  "description": "Generator ide proyek OpenAI/Codex secara acak — katalog terkurasi (26 ide), CLI, API lokal, dan UI tanpa dependensi.",
   "main": "server.js",
-  "bin": { "ide-codex": "cli.js" },
+  "bin": {
+    "ide-codex": "cli.js"
+  },
   "scripts": {
     "start": "node server.js",
     "dev": "node --watch server.js",
     "cli": "node cli.js",
     "test": "node --test tests/*.test.js",
     "test:watch": "node --test --watch tests/*.test.js",
-    "brief": "node cli.js --count 3 --format md --out docs/contoh-brief.md"
+    "brief": "node cli.js --count 3 --format md --out docs/contoh-brief.md",
+    "aplikasi": "node scripts/aplikasi.js"
   },
-  "engines": { "node": ">=18" },
-  "keywords": ["openai", "codex", "ide-proyek", "generator", "cli"],
+  "engines": {
+    "node": ">=18"
+  },
+  "keywords": [
+    "openai",
+    "codex",
+    "ide-proyek",
+    "generator",
+    "cli",
+    "codex-for-oss",
+    "open-source"
+  ],
   "license": "MIT"
 }

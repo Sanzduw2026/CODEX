@@ -4,14 +4,14 @@ const test = require('node:test');
 const assert = require('node:assert/strict');
 const {
   loadIdeas, validateIdea, filterIdeas, pickRandom, categories,
-  openaiFeatureCount, ideaToMarkdown, briefToMarkdown, toCSV, slugify, DIFFICULTIES,
+  openaiFeatureCount, ideaToMarkdown, briefToMarkdown, toCSV, slugify, DIFFICULTIES, dataFiles,
 } = require('../lib/ideas');
 const { parseArgs, seededRng } = require('../cli');
 
 const ideas = loadIdeas();
 
 test('dataset ide valid dan tidak duplikat', () => {
-  assert.ok(ideas.length >= 10, 'minimal 10 ide');
+  assert.ok(ideas.length >= 20, 'minimal 20 ide');
   const ids = new Set(ideas.map((i) => i.id));
   assert.equal(ids.size, ideas.length);
   for (const idea of ideas) assert.doesNotThrow(() => validateIdea(idea));
@@ -113,4 +113,38 @@ test('parseArgs membaca opsi dan menolak input salah', () => {
   assert.throws(() => parseArgs(['--format', 'xml']), /--format/);
   assert.throws(() => parseArgs(['--apa-ini']), /tidak dikenal/);
   assert.throws(() => parseArgs(['--category']), /butuh nilai/);
+});
+
+test('data terpecah per kategori dan konsisten', () => {
+  const files = dataFiles();
+  assert.equal(files.length, 11, 'harus ada 11 berkas kategori');
+  const all = [];
+  for (const file of files) {
+    const ideas = loadIdeas(file);
+    const category = ideas[0].category;
+    assert.ok(ideas.every((i) => i.category === category), `${file}: kategori campur`);
+    all.push(...ideas);
+  }
+  assert.equal(all.length, ideas.length);
+  assert.equal(new Set(all.map((i) => i.id)).size, all.length);
+
+  const byId = new Map(all.map((i) => [i.id, i]));
+  assert.equal(byId.get('whatsapp-order-agent').difficulty, 'Menengah');
+  assert.ok(byId.has('model-router-optimizer'));
+  assert.ok(byId.has('pr-review-coach'));
+});
+
+test('berkas rusak atau bukan array ditolak dengan pesan jelas', () => {
+  const os = require('node:os');
+  const fs = require('node:fs');
+  const path = require('node:path');
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'ide-codex-'));
+  const bad = path.join(dir, 'rusak.json');
+  fs.writeFileSync(bad, '{ bukan json');
+  assert.throws(() => loadIdeas(bad), /bukan JSON valid/);
+  fs.writeFileSync(bad, '[]');
+  assert.throws(() => loadIdeas(bad), /array ide/);
+  fs.writeFileSync(bad, JSON.stringify([{ id: 'x' }]));
+  assert.throws(() => loadIdeas(bad), /tidak punya field/);
+  fs.rmSync(dir, { recursive: true, force: true });
 });

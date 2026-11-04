@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-label="Ide Codex — 26 ide proyek OpenAI">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0b1020"/>
+      <stop offset="100%" stop-color="#1a2340"/>
+    </linearGradient>
+    <pattern id="dots" width="24" height="24" patternUnits="userSpaceOnUse">
+      <circle cx="2" cy="2" r="1" fill="#ffffff" opacity="0.10"/>
+    </pattern>
+  </defs>
+
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <rect width="1200" height="630" fill="url(#dots)"/>
+
+  <g font-family="DejaVu Sans, Helvetica, Arial, sans-serif">
+    <rect x="72" y="72" width="64" height="64" rx="16" fill="#b8f24a"/>
+    <text x="104" y="118" font-size="30" font-weight="bold" fill="#0b1020" text-anchor="middle" font-family="DejaVu Sans Mono, monospace">{ }</text>
+
+    <text x="156" y="118" font-size="30" font-weight="bold" fill="#f6f4ee">Ide Codex</text>
+    <text x="72" y="248" font-size="76" font-weight="bold" fill="#f6f4ee">Bingung mau bikin apa?</text>
+    <text x="72" y="326" font-size="76" font-weight="bold" fill="#b8f24a">Putar roda idenya.</text>
+
+    <text x="72" y="392" font-size="28" fill="#c9cee0">26 ide proyek OpenAI/Codex · 11 kategori · 18 kemampuan OpenAI</text>
+    <text x="72" y="434" font-size="26" fill="#9aa3bd">CLI + API + UI, nol dependensi, siap diekspor jadi brief.</text>
+
+    <g>
+      <rect x="72" y="490" width="300" height="38" rx="19" fill="#12182a" stroke="#2a3350"/>
+      <text x="92" y="516" font-size="19" fill="#dfe3d2">Structured Outputs</text>
+    </g>
+    <g>
+      <rect x="412" y="490" width="300" height="38" rx="19" fill="#12182a" stroke="#2a3350"/>
+      <text x="432" y="516" font-size="19" fill="#dfe3d2">Responses API</text>
+    </g>
+    <g>
+      <rect x="752" y="490" width="300" height="38" rx="19" fill="#12182a" stroke="#2a3350"/>
+      <text x="772" y="516" font-size="19" fill="#dfe3d2">Prompt caching</text>
+    </g>
+    <g>
+      <rect x="72" y="542" width="300" height="38" rx="19" fill="#12182a" stroke="#2a3350"/>
+      <text x="92" y="568" font-size="19" fill="#dfe3d2">Batch API</text>
+    </g>
+    <g>
+      <rect x="412" y="542" width="300" height="38" rx="19" fill="#12182a" stroke="#2a3350"/>
+      <text x="432" y="568" font-size="19" fill="#dfe3d2">Embeddings</text>
+    </g>
+    <g>
+      <rect x="752" y="542" width="300" height="38" rx="19" fill="#12182a" stroke="#2a3350"/>
+      <text x="772" y="568" font-size="19" fill="#dfe3d2">Function calling</text>
+    </g>
+
+    <text x="1128" y="576" font-size="22" fill="#8b7cf6" text-anchor="end">github.com/Sanzduw2026/CODEX</text>
+  </g>
+</svg>

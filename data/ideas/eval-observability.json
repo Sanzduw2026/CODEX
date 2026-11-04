@@ -1,0 +1,132 @@
+[
+  {
+    "id": "agent-eval-arena",
+    "title": "Agent Eval Arena",
+    "tagline": "Papan skor untuk adu prompt & agent, bukan cuma feeling.",
+    "category": "Evaluasi & Observability",
+    "difficulty": "Menengah",
+    "timeframe": "3 minggu",
+    "summary": "Framework kecil untuk menjalankan sekumpulan tugas (task suite) terhadap beberapa prompt/model/agent, lalu membandingkan hasil dengan rubrik otomatis + review manusia. Fokus pada reproduksibilitas: seed, versi prompt, dan biaya tercatat.",
+    "why": "'Apakah prompt baru lebih baik?' adalah pertanyaan yang tidak bisa dijawab tanpa harness eval. Ini fondasi untuk semua proyek AI serius.",
+    "stack": [
+      "Python",
+      "FastAPI",
+      "PostgreSQL",
+      "React",
+      "OpenAI SDK"
+    ],
+    "openaiFeatures": [
+      "Responses API",
+      "Structured Outputs",
+      "Function calling",
+      "Prompt versioning"
+    ],
+    "mvp": [
+      "Format task suite berbasis YAML (input, rubrik, contoh output)",
+      "Runner paralel dengan pencatatan token, biaya, latensi",
+      "LLM-as-judge dengan rubrik + kalibrasi terhadap label manusia",
+      "Dashboard perbandingan run (win rate, regresi, varians)"
+    ],
+    "stretch": [
+      "Pairwise Elo antar prompt",
+      "Deteksi regresi otomatis di CI",
+      "Mode 'red team' untuk prompt injection"
+    ],
+    "metrics": [
+      "Korelasi judge vs manusia ≥ 0.7",
+      "Satu run 100 task < 10 menit",
+      "Biaya per run tercatat akurat ±5%"
+    ],
+    "risks": [
+      "Judge bias ke jawaban panjang",
+      "Ketidakstabilan hasil antar seed"
+    ],
+    "prompt": "Nilai jawaban berikut terhadap rubrik. Kembalikan JSON {score: 1-5, alasan, kutipan_bukti}. Jangan menilai gaya panjang-pendek, hanya kepatuhan pada rubrik."
+  },
+  {
+    "id": "llm-cost-latency-monitor",
+    "title": "Monitor Biaya & Latensi LLM",
+    "tagline": "Tagihan bulanan tidak boleh jadi kejutan.",
+    "category": "Evaluasi & Observability",
+    "difficulty": "Pemula–Menengah",
+    "timeframe": "2 minggu",
+    "summary": "Proxy ringan di depan API model yang mencatat token, biaya, latensi per fitur/pengguna, mendeteksi pemakaian anomali, dan menegakkan anggaran per tim sebelum tagihan membengkak.",
+    "why": "Masalah pertama aplikasi AI setelah diluncurkan biasanya biaya, bukan kualitas. Alat ini kecil tapi langsung dipakai.",
+    "stack": [
+      "Node.js",
+      "ClickHouse",
+      "Grafana",
+      "Docker"
+    ],
+    "openaiFeatures": [
+      "Responses API",
+      "Prompt caching",
+      "Batch API",
+      "Token counting"
+    ],
+    "mvp": [
+      "Proxy transparan + atribusi biaya per fitur/pengguna",
+      "Anggaran harian/bulanan dengan hard stop dan alert",
+      "Deteksi anomali biaya (z-score sederhana)",
+      "Dashboard p50/p95 latensi dan rasio cache hit"
+    ],
+    "stretch": [
+      "Saran rute model lebih murah berdasarkan data nyata",
+      "Simulasi tagihan sebelum rilis fitur",
+      "Ekspor laporan ke Slack mingguan"
+    ],
+    "metrics": [
+      "Overhead < 25 ms p95",
+      "Selisih hitungan biaya < 3%",
+      "Anggaran terlampaui tertahan 100%"
+    ],
+    "risks": [
+      "Token estimation tidak akurat",
+      "Proxy menjadi single point of failure"
+    ],
+    "prompt": "Dari log permintaan ini, hitung perkiraan biaya berdasarkan tabel harga yang diberikan. Kembalikan JSON {inputTokens, cachedTokens, outputTokens, costUsd, notes}. Jika model tidak ada di tabel, kembalikan costUsd=null."
+  },
+  {
+    "id": "model-router-optimizer",
+    "title": "Router Model Hemat Biaya",
+    "tagline": "Model murah untuk tugas mudah, model kuat hanya saat perlu.",
+    "category": "Evaluasi & Observability",
+    "difficulty": "Lanjutan",
+    "timeframe": "3 minggu",
+    "summary": "Lapisan routing yang memilih model berdasarkan kompleksitas permintaan, lalu mengevaluasi hasilnya: berapa banyak kasus yang jawabannya sama dengan model termahal, dan berapa biaya yang dihemat. Termasuk fallback saat keyakinan rendah.",
+    "why": "Pertanyaan 'model mana untuk tugas ini' dijawab dengan data, bukan opini. Ini juga proyek yang bagus untuk menunjukkan pemahaman eval + ekonomi LLM.",
+    "stack": [
+      "Python",
+      "FastAPI",
+      "PostgreSQL",
+      "Grafana"
+    ],
+    "openaiFeatures": [
+      "Responses API",
+      "Structured Outputs",
+      "Batch API",
+      "Prompt caching"
+    ],
+    "mvp": [
+      "Klasifikasi kompleksitas (aturan + classifier kecil)",
+      "Rute ke kandidat model dengan batas biaya",
+      "Perbandingan kualitas terhadap baseline model termahal",
+      "Laporan penghematan + kasus di mana kualitas turun"
+    ],
+    "stretch": [
+      "Routing adaptif dari umpan balik pengguna",
+      "Anggaran per pengguna",
+      "A/B test rute secara aman"
+    ],
+    "metrics": [
+      "Penghematan biaya ≥ 40%",
+      "Penurunan kualitas ≤ 3% pada suite evaluasi",
+      "0 permintaan gagal karena fallback"
+    ],
+    "risks": [
+      "Router salah menilai tugas sulit",
+      "Suite evaluasi tidak mewakili trafik nyata"
+    ],
+    "prompt": "Nilai kompleksitas permintaan ini: mudah, sedang, sulit. Pertimbangkan kebutuhan penalaran, panjang konteks, dan risiko kesalahan. Kembalikan JSON {complexity, alasan, rekomendasi_model}. Jika ragu, pilih tingkat lebih tinggi."
+  }
+]

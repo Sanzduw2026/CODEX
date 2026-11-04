@@ -1,0 +1,130 @@
+[
+  {
+    "id": "spreadsheet-agent",
+    "title": "Analis Data Spreadsheet Otomatis",
+    "tagline": "Unggah CSV, dapat insight + grafik yang bisa diaudit.",
+    "category": "Data & Analitik",
+    "difficulty": "Menengah",
+    "timeframe": "3 minggu",
+    "summary": "Agen yang mengeksplorasi dataset tabular, menulis kode Python untuk analisis, menjalankan di sandbox, dan menyajikan temuan dengan bukti angka. Setiap klaim bisa dilacak ke sel/kode yang menghasilkannya.",
+    "why": "Latihan bagus untuk code execution + verifikasi: model tidak boleh mengarang angka, harus menjalankan kode.",
+    "stack": [
+      "Python",
+      "Pandas",
+      "Docker sandbox",
+      "Next.js",
+      "DuckDB"
+    ],
+    "openaiFeatures": [
+      "Code Interpreter / code execution",
+      "Function calling",
+      "Structured Outputs"
+    ],
+    "mvp": [
+      "Profil dataset: tipe kolom, missing value, outlier",
+      "Generate & jalankan kode analisis di sandbox terisolasi",
+      "Setiap insight menyertakan kode + hasil eksekusi",
+      "Ekspor laporan (Markdown + PNG grafik)"
+    ],
+    "stretch": [
+      "Tanya-jawab lanjutan dengan state dataframe",
+      "Deteksi anomali otomatis",
+      "Mode 'data provinsi/BPS' siap pakai"
+    ],
+    "metrics": [
+      "0 angka tanpa bukti eksekusi",
+      "Waktu analisis awal < 60 s",
+      "Sandbox tanpa akses jaringan"
+    ],
+    "risks": [
+      "Data sensitif di sandbox",
+      "Interpretasi statistik salah"
+    ],
+    "prompt": "Kamu analis data. Untuk setiap pertanyaan, tulis kode Python yang dapat dijalankan, lalu laporkan hasil. Jangan menyebut angka yang tidak muncul di output eksekusi. Sertakan potongan kode untuk setiap klaim."
+  },
+  {
+    "id": "receipt-to-ledger",
+    "title": "Struk Belanja → Pembukuan Otomatis",
+    "tagline": "Foto struk jadi catatan pengeluaran yang rapi.",
+    "category": "Data & Analitik",
+    "difficulty": "Pemula",
+    "timeframe": "1–2 minggu",
+    "summary": "Aplikasi mobile-first untuk pemilik usaha kecil: foto struk, sistem membaca merchant, tanggal, total, dan item, mengklasifikasikan ke kategori biaya, lalu menyusun rekap bulanan yang siap diserahkan ke akuntan.",
+    "why": "Proyek akhir pekan yang benar-benar dipakai orang, dengan tantangan multimodal nyata: struk kusut, kertas thermal pudar, angka campur.",
+    "stack": [
+      "Next.js",
+      "SQLite",
+      "Tailwind",
+      "S3"
+    ],
+    "openaiFeatures": [
+      "Vision input",
+      "Structured Outputs",
+      "Embeddings"
+    ],
+    "mvp": [
+      "Ekstraksi struk ke JSON dengan skor keyakinan per field",
+      "Klasifikasi kategori biaya + aturan khusus pengguna",
+      "Review cepat: field berconfidence rendah disorot",
+      "Rekap bulanan CSV + ringkasan kategori"
+    ],
+    "stretch": [
+      "Deteksi struk ganda",
+      "Prediksi arus kas sederhana",
+      "Mode offline dengan antrean unggah"
+    ],
+    "metrics": [
+      "Akurasi total nominal ≥ 97%",
+      "Waktu input per struk < 20 detik",
+      "Biaya < $0.005 per struk"
+    ],
+    "risks": [
+      "Total terbaca salah pada struk pudar",
+      "Pajak/biaya tambahan tidak tertangkap"
+    ],
+    "prompt": "Baca struk ini. Kembalikan JSON {merchant, date, currency, lineItems[{name, qty, price}], subtotal, tax, total, confidence{...}}. Jangan menjumlah ulang jika total tercetak; gunakan nilai tercetak dan tandai jika tidak konsisten."
+  },
+  {
+    "id": "metric-anomaly-copilot",
+    "title": "Penjelas Anomali Metrik",
+    "tagline": "Bukan sekadar 'grafik turun', tapi 'kenapa turun'.",
+    "category": "Data & Analitik",
+    "difficulty": "Menengah",
+    "timeframe": "3 minggu",
+    "summary": "Saat metrik bisnis menyimpang, agen menelusuri dimensi (kanal, perangkat, kota, versi app), menjalankan query untuk menguji hipotesis, dan menulis penjelasan dengan angka pendukung serta hipotesis yang masih terbuka.",
+    "why": "Menggabungkan text-to-SQL dengan penalaran kausal sederhana, dan sangat mudah diuji dengan data sintetis yang anomali-nya kamu buat sendiri.",
+    "stack": [
+      "Python",
+      "DuckDB",
+      "FastAPI",
+      "Next.js"
+    ],
+    "openaiFeatures": [
+      "Function calling",
+      "Structured Outputs",
+      "Code execution",
+      "Embeddings"
+    ],
+    "mvp": [
+      "Deteksi anomali + peringatan berisi konteks",
+      "Tool query aman (read-only, batas baris)",
+      "Rangkaian hipotesis yang diuji dengan angka",
+      "Laporan: temuan, bukti, hipotesis tertutup/terbuka"
+    ],
+    "stretch": [
+      "Pembelajaran dari anomali lampau (playbook)",
+      "Integrasi Slack/Teams",
+      "Penjelasan berbahasa Indonesia untuk manajer non-teknis"
+    ],
+    "metrics": [
+      "≥ 70% anomali sintetis terjelaskan benar",
+      "0 query destruktif",
+      "Waktu investigasi < 2 menit"
+    ],
+    "risks": [
+      "Korelasi disalahartikan sebagai sebab",
+      "Skema tabel besar membingungkan model"
+    ],
+    "prompt": "Kamu analis. Hipotesiskan maksimal 3 penyebab anomali, lalu tulis query read-only untuk menguji tiap hipotesis. Laporkan hasil hanya dari output query. Akhiri dengan daftar hal yang belum bisa dijelaskan."
+  }
+]

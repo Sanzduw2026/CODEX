@@ -1,0 +1,56 @@
+name: CI
+
+on:
+  push:
+    branches: [main, "arena/**"]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    name: Test (Node ${{ matrix.node }})
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        node: [18, 20, 22]
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node }}
+
+      - name: Cek sintaks
+        run: |
+          node --check lib/ideas.js
+          node --check cli.js
+          node --check server.js
+          node --check public/app.js
+
+      - name: Jalankan test
+        run: npm test
+
+      - name: Asap CLI
+        run: |
+          node cli.js --list > /dev/null
+          node cli.js -n 3 --seed ci --format json > /dev/null
+          node cli.js --id doc-qa-citations --format md > /dev/null
+
+      - name: Asap server + API
+        run: |
+          node server.js &
+          SERVER_PID=$!
+          for i in $(seq 1 20); do
+            curl -sf http://127.0.0.1:4173/healthz > /dev/null && break
+            sleep 0.3
+          done
+          curl -sf http://127.0.0.1:4173/ > /dev/null
+          curl -sf http://127.0.0.1:4173/api/meta > /dev/null
+          curl -sf "http://127.0.0.1:4173/api/random?count=2&difficulty=Menengah" > /dev/null
+          curl -sf "http://127.0.0.1:4173/api/export?format=md&count=2" > /dev/null
+          kill $SERVER_PID

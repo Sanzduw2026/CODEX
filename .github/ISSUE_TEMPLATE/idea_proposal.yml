@@ -1,0 +1,49 @@
+name: Usul ide proyek
+description: Usulkan ide OpenAI/Codex baru untuk masuk katalog
+title: "idea: "
+labels: ["ide-baru"]
+body:
+  - type: input
+    id: judul
+    attributes:
+      label: Nama ide
+      placeholder: "Agen rekonsiliasi pembayaran"
+    validations:
+      required: true
+  - type: textarea
+    id: masalah
+    attributes:
+      label: Masalah yang dipecahkan
+      description: Siapa yang kesulitan, dan kenapa cara sekarang tidak cukup.
+    validations:
+      required: true
+  - type: textarea
+    id: mvp
+    attributes:
+      label: Gambaran MVP (maksimal 5 langkah)
+      placeholder: |
+        1. ...
+        2. ...
+    validations:
+      required: true
+  - type: textarea
+    id: metrik
+    attributes:
+      label: Bagaimana kita tahu ini berhasil?
+      description: Angka, persentase, atau batas biaya.
+    validations:
+      required: true
+  - type: dropdown
+    id: tingkat
+    attributes:
+      label: Tingkat kesulitan
+      options: [Pemula, "Pemula–Menengah", Menengah, Lanjutan]
+    validations:
+      required: true
+  - type: checkboxes
+    id: kesediaan
+    attributes:
+      label: Kesediaan
+      options:
+        - label: Saya bersedia mengirim PR untuk ide ini
+        - label: Saya hanya mengusulkan, tidak punya waktu mengerjakan

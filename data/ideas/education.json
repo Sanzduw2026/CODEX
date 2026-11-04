@@ -1,0 +1,88 @@
+[
+  {
+    "id": "learning-path-tutor",
+    "title": "Tutor Adaptif dengan Memory",
+    "tagline": "Kurikulum yang menyesuaikan diri, bukan chatbot yang lupa.",
+    "category": "Edukasi",
+    "difficulty": "Menengah",
+    "timeframe": "3 minggu",
+    "summary": "Tutor untuk satu topik (mis. Python untuk analis) yang menyimpan peta penguasaan konsep, memberi soal bertingkat, dan mengulang materi yang lemah pada interval yang tepat.",
+    "why": "Kombinasi memory terstruktur + spaced repetition — pola yang berguna untuk banyak produk personalisasi.",
+    "stack": [
+      "Next.js",
+      "PostgreSQL",
+      "Prisma",
+      "Tailwind"
+    ],
+    "openaiFeatures": [
+      "Responses API",
+      "Structured Outputs",
+      "Embeddings",
+      "Function calling"
+    ],
+    "mvp": [
+      "Peta konsep + bank soal bertingkat",
+      "State penguasaan per konsep (bukan riwayat chat mentah)",
+      "Generator soal yang memvalidasi jawaban dengan kode/uji",
+      "Jadwal ulangan (SM-2 sederhana)"
+    ],
+    "stretch": [
+      "Mode Socratic tanpa membocorkan jawaban",
+      "Rapor mingguan untuk orang tua/guru",
+      "Impor kurikulum dari silabus"
+    ],
+    "metrics": [
+      "Kenaikan skor post-test ≥ 20%",
+      "Retensi 7 hari ≥ 70%",
+      "Biaya per sesi < $0.02"
+    ],
+    "risks": [
+      "Soal tidak akurat",
+      "Memory menggelembung dan makin mahal"
+    ],
+    "prompt": "Buat soal untuk konsep X pada level Y. Sertakan jawaban benar, rubrik, dan satu miskonsepsi umum yang harus dideteksi. Kembalikan JSON sesuai schema."
+  },
+  {
+    "id": "school-quiz-generator",
+    "title": "Pembuat Kuis Kurikulum Sekolah",
+    "tagline": "Soal bertingkat dari materi guru, lengkap dengan kunci dan pembahasan.",
+    "category": "Edukasi",
+    "difficulty": "Pemula–Menengah",
+    "timeframe": "2 minggu",
+    "summary": "Guru mengunggah materi (PDF/slide), sistem menghasilkan paket soal dengan tingkat kesulitan berlapis, kunci jawaban, pembahasan, dan varian A/B untuk mencegah contekan — dengan biaya per paket yang sangat kecil.",
+    "why": "Pengguna jelas (guru), waktu yang dihemat nyata, dan cocok untuk menunjukkan Batch API + caching untuk menekan biaya di skala sekolah.",
+    "stack": [
+      "Python",
+      "FastAPI",
+      "PostgreSQL",
+      "React"
+    ],
+    "openaiFeatures": [
+      "Batch API",
+      "Structured Outputs",
+      "Prompt caching",
+      "Embeddings"
+    ],
+    "mvp": [
+      "Impor materi dan ekstraksi konsep kunci",
+      "Generate paket soal: mudah/sedang/sulit + pembahasan",
+      "Validasi otomatis: tidak ada soal duplikat, kunci konsisten",
+      "Ekspor DOCX/PDF siap cetak"
+    ],
+    "stretch": [
+      "Varian soal per siswa dari bank yang sama",
+      "Analitik butir soal (tingkat kesulitan nyata)",
+      "Umpan balik otomatis untuk jawaban esai"
+    ],
+    "metrics": [
+      "Biaya < $0.02 per paket 20 soal",
+      "≥ 95% soal lolos validasi otomatis",
+      "Guru hanya mengedit < 20% soal"
+    ],
+    "risks": [
+      "Soal ambigu atau kunci salah",
+      "Materi berhak cipta"
+    ],
+    "prompt": "Buat soal pilihan ganda untuk konsep berikut pada level yang diminta. Setiap soal: pertanyaan, 4 opsi, kunci, pembahasan 2 kalimat, dan konsep yang diuji. Hindari jebakan yang menguji bacaan, bukan pemahaman."
+  }
+]
