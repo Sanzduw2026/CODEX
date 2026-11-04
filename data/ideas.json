@@ -1,0 +1,366 @@
+[
+  {
+    "id": "codex-repo-onboarding",
+    "title": "Codex Repo Onboarding Copilot",
+    "tagline": "Ubah repo asing jadi peta pengetahuan dalam 5 menit.",
+    "category": "Codex / Developer Tools",
+    "difficulty": "Menengah",
+    "timeframe": "2–3 minggu",
+    "summary": "CLI + web report yang membaca sebuah repositori, memetakan arsitektur, titik masuk, alur data, dan 'jebakan' (config tersembunyi, migrasi DB, env wajib), lalu menulis dokumen onboarding yang bisa dibaca manusia dan dipakai ulang oleh Codex sebagai konteks.",
+    "why": "Onboarding repo adalah tugas pertama yang paling sering diminta ke Codex. Output yang terstruktur (bukan chat) membuat hasilnya bisa direview tim dan dipakai ulang.",
+    "stack": ["Node.js", "TypeScript", "Codex CLI", "SQLite", "Mermaid"],
+    "openaiFeatures": ["Codex CLI", "Structured Outputs", "Embeddings", "Prompt caching"],
+    "mvp": [
+      "Index file kunci: manifest, entrypoint, CI, migrasi, env example",
+      "Ringkas tiap modul + diagram arsitektur Mermaid",
+      "Generate ONBOARDING.md + 'first tasks' untuk kontributor baru",
+      "Skor keyakinan per klaim, tandai bagian yang perlu dicek manusia"
+    ],
+    "stretch": [
+      "Watch mode: perbarui dokumen saat PR merge",
+      "Band context per modul agar hemat token",
+      "Reviewer mode: bandingkan dokumen vs kode terkini"
+    ],
+    "metrics": ["Waktu onboarding < 10 menit", "≥ 80% klaim diverifikasi benar", "Biaya analisis < $0.05 per repo"],
+    "risks": ["Repo besar bisa melebihi konteks", "Klaim halusinasi soal perilaku runtime"],
+    "prompt": "Kamu adalah arsitek perangkat lunak. Dari daftar file dan isi modul yang saya berikan, hasilkan ringkasan arsitektur dalam JSON: entrypoints, modules, dataFlow, risks, openQuestions. Setiap klaim harus menyertakan file sebagai bukti."
+  },
+  {
+    "id": "agent-eval-arena",
+    "title": "Agent Eval Arena",
+    "tagline": "Papan skor untuk adu prompt & agent, bukan cuma feeling.",
+    "category": "Evaluasi & Observability",
+    "difficulty": "Menengah",
+    "timeframe": "3 minggu",
+    "summary": "Framework kecil untuk menjalankan sekumpulan tugas (task suite) terhadap beberapa prompt/model/agent, lalu membandingkan hasil dengan rubrik otomatis + review manusia. Fokus pada reproduksibilitas: seed, versi prompt, dan biaya tercatat.",
+    "why": "'Apakah prompt baru lebih baik?' adalah pertanyaan yang tidak bisa dijawab tanpa harness eval. Ini fondasi untuk semua proyek AI serius.",
+    "stack": ["Python", "FastAPI", "PostgreSQL", "React", "OpenAI SDK"],
+    "openaiFeatures": ["Responses API", "Structured Outputs", "Function calling", "Prompt versioning"],
+    "mvp": [
+      "Format task suite berbasis YAML (input, rubrik, contoh output)",
+      "Runner paralel dengan pencatatan token, biaya, latensi",
+      "LLM-as-judge dengan rubrik + kalibrasi terhadap label manusia",
+      "Dashboard perbandingan run (win rate, regresi, varians)"
+    ],
+    "stretch": [
+      "Pairwise Elo antar prompt",
+      "Deteksi regresi otomatis di CI",
+      "Mode 'red team' untuk prompt injection"
+    ],
+    "metrics": ["Korelasi judge vs manusia ≥ 0.7", "Satu run 100 task < 10 menit", "Biaya per run tercatat akurat ±5%"],
+    "risks": ["Judge bias ke jawaban panjang", "Ketidakstabilan hasil antar seed"],
+    "prompt": "Nilai jawaban berikut terhadap rubrik. Kembalikan JSON {score: 1-5, alasan, kutipan_bukti}. Jangan menilai gaya panjang-pendek, hanya kepatuhan pada rubrik."
+  },
+  {
+    "id": "realtime-voice-receptionist",
+    "title": "Resepsionis Suara Real-time",
+    "tagline": "Asisten telepon yang bisa memesan, menjadwalkan, dan mengalihkan ke manusia.",
+    "category": "Voice & Realtime",
+    "difficulty": "Lanjutan",
+    "timeframe": "4 minggu",
+    "summary": "Aplikasi voice agent untuk bisnis kecil (klinik, barbershop, restoran): menerima panggilan, memahami intent, cek ketersediaan slot, dan membuat reservasi. Handoff ke manusia saat keyakinan rendah atau permintaan sensitif.",
+    "why": "Latensi percakapan adalah tantangan engineering nyata: barge-in, VAD, state percakapan, dan fallback yang tidak terasa kaku.",
+    "stack": ["Node.js", "WebRTC", "Next.js", "Redis", "SQLite"],
+    "openaiFeatures": ["Realtime API", "Audio streaming", "Function calling", "Transcription"],
+    "mvp": [
+      "Alur reservasi dengan tool: cek slot, buat booking, kirim konfirmasi",
+      "Kalender sederhana + aturan bisnis (jam buka, durasi layanan)",
+      "Deteksi barge-in dan pemulihan saat user memotong",
+      "Log transkrip + ringkasan panggilan otomatis"
+    ],
+    "stretch": [
+      "Multi-bahasa (ID/EN) dengan deteksi otomatis",
+      "Analitik: intent gagal terbanyak",
+      "Escalation berbasis sentimen"
+    ],
+    "metrics": ["Latensi balas < 800 ms p95", "≥ 70% panggilan uji selesai tanpa manusia", "0 double-booking"],
+    "risks": ["Kualitas audio jaringan buruk", "Data pribadi dalam rekaman suara"],
+    "prompt": "Kamu resepsionis ramah dan efisien. Tujuan: kumpulkan layanan, tanggal, jam, nama, dan nomor telepon. Ajukan satu pertanyaan per giliran. Jika user marah atau minta manusia, segera panggil tool escalate_to_human."
+  },
+  {
+    "id": "doc-qa-citations",
+    "title": "Tanya Dokumen, Dapat Kutipan",
+    "tagline": "RAG yang menolak menjawab kalau tidak ada bukti.",
+    "category": "RAG & Knowledge",
+    "difficulty": "Pemula–Menengah",
+    "timeframe": "2 minggu",
+    "summary": "Sistem tanya-jawab di atas kumpulan dokumen internal (PDF, Markdown, Notion export) yang selalu menampilkan kutipan halaman/paragraf, dan menjawab 'tidak tahu' ketika bukti tidak cukup.",
+    "why": "Proyek RAG klasik, tetapi fokus pada bagian yang paling sering diabaikan: sitasi yang benar dan penolakan yang jujur.",
+    "stack": ["Python", "FastAPI", "pgvector", "Next.js"],
+    "openaiFeatures": ["Embeddings", "Responses API", "Structured Outputs", "File Search"],
+    "mvp": [
+      "Ingest + chunking sadar-struktur (heading, tabel)",
+      "Hybrid search (BM25 + vektor) dengan rerank",
+      "Jawaban wajib JSON: {answer, citations[], confidence}",
+      "Halaman evaluasi: ukur faithfulness & citation accuracy"
+    ],
+    "stretch": [
+      "Multi-dokumen dengan ACL per pengguna",
+      "Highlight kutipan langsung di PDF viewer",
+      "Cache semantik untuk pertanyaan berulang"
+    ],
+    "metrics": ["Citation accuracy ≥ 95%", "Penolakan tepat pada 20 pertanyaan jebakan", "p95 latensi < 3 s"],
+    "risks": ["Chunk memotong konteks penting", "Dokumen usang"],
+    "prompt": "Jawab HANYA dari konteks yang diberikan. Sertakan id kutipan untuk setiap klaim. Jika konteks tidak memadai, kembalikan answer=null dan alasan singkat. Jangan menebak."
+  },
+  {
+    "id": "screenshot-to-app",
+    "title": "Screenshot → Aplikasi Jalan",
+    "tagline": "Dari gambar desain ke komponen React yang bisa dites.",
+    "category": "Codex / Developer Tools",
+    "difficulty": "Menengah",
+    "timeframe": "3 minggu",
+    "summary": "Pipeline yang mengubah screenshot UI menjadi komponen React + Tailwind, lengkap dengan test visual: render ulang, bandingkan screenshot, dan iterasi sampai selisih pixel di bawah ambang.",
+    "why": "Memaksa loop agent yang benar-benar tertutup: generate → render → ukur → perbaiki. Skill yang sama dipakai untuk semua tugas coding agent.",
+    "stack": ["TypeScript", "Playwright", "Vite", "Codex CLI"],
+    "openaiFeatures": ["Vision input", "Codex CLI", "Structured Outputs"],
+    "mvp": [
+      "Ekstraksi layout & design token kasar dari gambar",
+      "Generate komponen + storybook/story per komponen",
+      "Render headless, diff screenshot, hitung skor kemiripan",
+      "Maksimal N iterasi perbaikan dengan riwayat diff"
+    ],
+    "stretch": [
+      "Mode responsif (mobile/desktop)",
+      "Ekstraksi aset & ikon otomatis",
+      "Ekspor ke shadcn/ui"
+    ],
+    "metrics": ["Skor kemiripan ≥ 0.9 pada 10 desain uji", "Semua komponen punya test render", "< 5 iterasi rata-rata"],
+    "risks": ["Desain ambigu/bergerak", "Font & aset tidak tersedia"],
+    "prompt": "Bandingkan dua screenshot. Daftar perbedaan visual yang terlihat (spacing, ukuran font, warna, radius, alignment) dalam JSON, urut dari yang paling mengganggu. Jangan menyarankan perbaikan CSS dulu."
+  },
+  {
+    "id": "meeting-to-tasks",
+    "title": "Rapat → Tiket yang Siap Dikerjakan",
+    "tagline": "Notulen otomatis yang berakhir jadi backlog, bukan PDF terlupakan.",
+    "category": "Produktivitas & Agen",
+    "difficulty": "Pemula–Menengah",
+    "timeframe": "2 minggu",
+    "summary": "Rekam/unggah rapat, hasilkan transkrip, ringkasan keputusan, dan daftar action item dengan owner + tenggat, lalu dorong ke GitHub Issues atau Linear lewat tool call dengan konfirmasi manusia.",
+    "why": "Kasus pemakaian agen yang langsung terasa dampaknya dan melatih hal penting: approval sebelum aksi destruktif.",
+    "stack": ["Python", "Whisper/Transcription API", "FastAPI", "GitHub API"],
+    "openaiFeatures": ["Transcription", "Structured Outputs", "Function calling", "Responses API"],
+    "mvp": [
+      "Transkripsi dengan timestamp per pembicara",
+      "Ekstraksi decisions + action items (JSON schema ketat)",
+      "Halaman review: edit owner/tenggat sebelum dibuat",
+      "Push ke GitHub Issues via tool dengan idempotency key"
+    ],
+    "stretch": [
+      "Deteksi action item yang tidak pernah ditutup",
+      "Ringkasan mingguan per tim",
+      "Integrasi Slack untuk konfirmasi"
+    ],
+    "metrics": ["Precision action item ≥ 80%", "0 duplikasi tiket", "Review < 3 menit per rapat"],
+    "risks": ["Nama & istilah salah dengar", "Action item implisit tidak tertangkap"],
+    "prompt": "Dari transkrip, hasilkan JSON: decisions[], actionItems[{title, owner|null, dueDate|null, sourceQuote}]. Hanya sertakan item yang benar-benar disepakati. Jika owner tidak disebut, isi null. Sertakan kutipan asli."
+  },
+  {
+    "id": "guardrail-firewall",
+    "title": "Firewall Prompt untuk Aplikasi Produksi",
+    "tagline": "Lapisan pertahanan sebelum permintaan menyentuh model.",
+    "category": "Keamanan AI",
+    "difficulty": "Lanjutan",
+    "timeframe": "3–4 minggu",
+    "summary": "Middleware yang memeriksa input & output: prompt injection, kebocoran PII, upaya eksfiltrasi system prompt, dan output tidak aman. Dilengkapi dataset serangan, skor blokir, dan laporan false positive.",
+    "why": "Setiap aplikasi AI produksi butuh ini. Kombinasi classifier kecil, aturan deterministik, dan uji regresi keamanan.",
+    "stack": ["TypeScript", "FastAPI", "Redis", "Grafana"],
+    "openaiFeatures": ["Moderation", "Structured Outputs", "Guardrails", "Embeddings"],
+    "mvp": [
+      "Deteksi PII (regex + model) dengan redaksi bisa-dikonfigurasi",
+      "Klasifikasi input berisiko dengan label + alasan",
+      "Aturan output: cek kode berbahaya, kebocoran rahasia",
+      "Dataset serangan v1 (≥ 100 kasus) + skor deteksi"
+    ],
+    "stretch": [
+      "Mode shadow: log saja sebelum enforce",
+      "Uji adversarial otomatis tiap rilis",
+      "Dashboard false positive per aturan"
+    ],
+    "metrics": ["Recall ≥ 90% pada dataset serangan", "False positive < 3%", "Overhead < 40 ms p95"],
+    "risks": ["Terlalu agresif memblokir pengguna sah", "Serangan baru lolos"],
+    "prompt": "Klasifikasikan input pengguna. Kembalikan JSON {risk: low|medium|high, categories[], reason, redacted}. Kategori: injection, pii, illegal, self-harm, exfiltration. Alasan maksimal dua kalimat."
+  },
+  {
+    "id": "spreadsheet-agent",
+    "title": "Analis Data Spreadsheet Otomatis",
+    "tagline": "Unggah CSV, dapat insight + grafik yang bisa diaudit.",
+    "category": "Data & Analitik",
+    "difficulty": "Menengah",
+    "timeframe": "3 minggu",
+    "summary": "Agen yang mengeksplorasi dataset tabular, menulis kode Python untuk analisis, menjalankan di sandbox, dan menyajikan temuan dengan bukti angka. Setiap klaim bisa dilacak ke sel/kode yang menghasilkannya.",
+    "why": "Latihan bagus untuk code execution + verifikasi: model tidak boleh mengarang angka, harus menjalankan kode.",
+    "stack": ["Python", "Pandas", "Docker sandbox", "Next.js", "DuckDB"],
+    "openaiFeatures": ["Code Interpreter / code execution", "Function calling", "Structured Outputs"],
+    "mvp": [
+      "Profil dataset: tipe kolom, missing value, outlier",
+      "Generate & jalankan kode analisis di sandbox terisolasi",
+      "Setiap insight menyertakan kode + hasil eksekusi",
+      "Ekspor laporan (Markdown + PNG grafik)"
+    ],
+    "stretch": [
+      "Tanya-jawab lanjutan dengan state dataframe",
+      "Deteksi anomali otomatis",
+      "Mode 'data provinsi/BPS' siap pakai"
+    ],
+    "metrics": ["0 angka tanpa bukti eksekusi", "Waktu analisis awal < 60 s", "Sandbox tanpa akses jaringan"],
+    "risks": ["Data sensitif di sandbox", "Interpretasi statistik salah"],
+    "prompt": "Kamu analis data. Untuk setiap pertanyaan, tulis kode Python yang dapat dijalankan, lalu laporkan hasil. Jangan menyebut angka yang tidak muncul di output eksekusi. Sertakan potongan kode untuk setiap klaim."
+  },
+  {
+    "id": "multilingual-support",
+    "title": "Copilot CS Multibahasa untuk UMKM",
+    "tagline": "Balasan bahasa Indonesia, Inggris, dan daerah — dengan nada yang tepat.",
+    "category": "Produktivitas & Agen",
+    "difficulty": "Pemula",
+    "timeframe": "1–2 minggu",
+    "summary": "Asisten untuk pemilik usaha kecil: mengubah pertanyaan pelanggan (WhatsApp/IG) menjadi draf balasan yang sopan, singkat, sesuai kebijakan toko, dalam bahasa pelanggan, plus tombol 'jelaskan kenapa'.",
+    "why": "Cepat dibangun, langsung berguna, dan melatih hal yang sering diremehkan: nada, konteks lokal, dan konsistensi kebijakan.",
+    "stack": ["Next.js", "SQLite", "Tailwind"],
+    "openaiFeatures": ["Responses API", "Structured Outputs", "Prompt caching", "Moderation"],
+    "mvp": [
+      "Profil toko: kebijakan retur, jam buka, ongkir, nada bicara",
+      "Generate 3 opsi balasan (formal/santai/ringkas)",
+      "Deteksi bahasa otomatis + jaga istilah produk",
+      "Tombol eskalasi: 'ini perlu manusia'"
+    ],
+    "stretch": [
+      "Template jawaban yang dipelajari dari riwayat",
+      "Analitik pertanyaan berulang",
+      "WhatsApp Business API"
+    ],
+    "metrics": ["Waktu balas turun 50%", "≥ 90% draf dipakai dengan sedikit edit", "0 pelanggaran kebijakan toko"],
+    "risks": ["Janji yang tidak boleh dibuat model", "Sapaan yang terasa robotik"],
+    "prompt": "Buat 3 draf balasan CS untuk pelanggan. Bahasa mengikuti bahasa pelanggan. Jangan menjanjikan hal di luar kebijakan toko berikut. Kembalikan JSON {formal, casual, brief, needsHuman}."
+  },
+  {
+    "id": "test-writer-sweep",
+    "title": "Codex Test Sweep",
+    "tagline": "Naikkan coverage tanpa membuat test palsu.",
+    "category": "Codex / Developer Tools",
+    "difficulty": "Menengah",
+    "timeframe": "2–3 minggu",
+    "summary": "Tool yang menemukan fungsi tanpa test, memprioritaskan yang paling berisiko, menulis test, lalu memverifikasi test benar-benar gagal saat kode dirusak (mutation check).",
+    "why": "Mengajarkan verifikasi keras: test yang selalu hijau tidak bernilai. Mutation testing membuat agen tidak bisa curang.",
+    "stack": ["TypeScript", "Vitest", "StrykerJS", "Codex CLI"],
+    "openaiFeatures": ["Codex CLI", "Batch API", "Structured Outputs"],
+    "mvp": [
+      "Peta coverage per fungsi + skor risiko sederhana",
+      "Generate test + jalankan; hanya simpan yang lolos",
+      "Mutation check: test harus gagal saat mutan dibuat",
+      "PR otomatis dengan ringkasan + batas jumlah perubahan"
+    ],
+    "stretch": [
+      "Belajar gaya test repo dari contoh yang ada",
+      "Dukungan Python (pytest + mutmut)",
+      "Kuota biaya per repo"
+    ],
+    "metrics": ["Coverage +15 poin", "≥ 70% test bertahan mutation check", "Tidak ada perubahan kode produksi"],
+    "risks": ["Test rapuh terhadap implementasi", "Banjir PR"],
+    "prompt": "Tulis test untuk fungsi berikut. Test harus gagal jika logika berubah (hindari assertion trivial). Gunakan gaya test yang sudah ada di repo. Jelaskan skenario yang tidak bisa dites tanpa refactor."
+  },
+  {
+    "id": "learning-path-tutor",
+    "title": "Tutor Adaptif dengan Memory",
+    "tagline": "Kurikulum yang menyesuaikan diri, bukan chatbot yang lupa.",
+    "category": "Edukasi",
+    "difficulty": "Menengah",
+    "timeframe": "3 minggu",
+    "summary": "Tutor untuk satu topik (mis. Python untuk analis) yang menyimpan peta penguasaan konsep, memberi soal bertingkat, dan mengulang materi yang lemah pada interval yang tepat.",
+    "why": "Kombinasi memory terstruktur + spaced repetition — pola yang berguna untuk banyak produk personalisasi.",
+    "stack": ["Next.js", "PostgreSQL", "Prisma", "Tailwind"],
+    "openaiFeatures": ["Responses API", "Structured Outputs", "Embeddings", "Function calling"],
+    "mvp": [
+      "Peta konsep + bank soal bertingkat",
+      "State penguasaan per konsep (bukan riwayat chat mentah)",
+      "Generator soal yang memvalidasi jawaban dengan kode/uji",
+      "Jadwal ulangan (SM-2 sederhana)"
+    ],
+    "stretch": [
+      "Mode Socratic tanpa membocorkan jawaban",
+      "Rapor mingguan untuk orang tua/guru",
+      "Impor kurikulum dari silabus"
+    ],
+    "metrics": ["Kenaikan skor post-test ≥ 20%", "Retensi 7 hari ≥ 70%", "Biaya per sesi < $0.02"],
+    "risks": ["Soal tidak akurat", "Memory menggelembung dan makin mahal"],
+    "prompt": "Buat soal untuk konsep X pada level Y. Sertakan jawaban benar, rubrik, dan satu miskonsepsi umum yang harus dideteksi. Kembalikan JSON sesuai schema."
+  },
+  {
+    "id": "contract-reviewer",
+    "title": "Pemeriksa Kontrak dengan Sorotan Risiko",
+    "tagline": "Tandai klausul berisiko dan jelaskan dalam bahasa manusia.",
+    "category": "Dokumen & Legal",
+    "difficulty": "Lanjutan",
+    "timeframe": "3–4 minggu",
+    "summary": "Alat bantu review kontrak: menandai klausul risiko (denda, terminasi, kepemilikan IP, kerahasiaan), membandingkan dengan playbook perusahaan, dan menghasilkan catatan negosiasi. Selalu dengan disclaimer dan wajib review manusia.",
+    "why": "Domain di mana sitasi + kalibrasi keyakinan sangat penting, dan salah sedikit bisa mahal.",
+    "stack": ["Python", "FastAPI", "pgvector", "React"],
+    "openaiFeatures": ["Responses API", "Structured Outputs", "File Search", "Prompt caching"],
+    "mvp": [
+      "Segmentasi klausul + klasifikasi jenis",
+      "Bandingkan dengan playbook (posisi standar perusahaan)",
+      "Output: klausul, risiko, kutipan, saran redline",
+      "Halaman review dengan approve/reject per temuan"
+    ],
+    "stretch": [
+      "Perbandingan dua versi kontrak (diff klausul)",
+      "Ekspor catatan negosiasi ke DOCX",
+      "Kalibrasi keyakinan terhadap review lawyer"
+    ],
+    "metrics": ["Recall klausul risiko ≥ 85%", "Semua temuan punya kutipan", "False alarm < 15%"],
+    "risks": ["Kesalahan berdampak hukum", "Bias playbook satu yurisdiksi"],
+    "prompt": "Analisis klausul berikut terhadap playbook. Kembalikan JSON {clauseId, type, riskLevel, quote, deviation, suggestion, confidence}. Jika ragu, turunkan confidence, jangan mengarang isi playbook."
+  },
+  {
+    "id": "image-catalog-tagger",
+    "title": "Katalog Foto Produk Otomatis",
+    "tagline": "Dari 5.000 foto mentah ke katalog yang bisa dicari.",
+    "category": "Vision & Multimodal",
+    "difficulty": "Pemula–Menengah",
+    "timeframe": "2 minggu",
+    "summary": "Tool batch yang memberi tag, judul, dan deskripsi SEO untuk foto produk, mendeteksi foto jelek (blur, background kotor), dan mengelompokkan varian warna. Output CSV siap impor ke toko online.",
+    "why": "Nilai bisnis jelas, dan melatih batch processing dan kontrol kualitas output dalam skala besar dengan biaya terkendali.",
+    "stack": ["Python", "FastAPI", "Next.js", "S3"],
+    "openaiFeatures": ["Vision input", "Batch API", "Structured Outputs", "Embeddings"],
+    "mvp": [
+      "Antrean batch dengan retry & batas biaya",
+      "Skema tag: kategori, warna, material, gaya, kata kunci SEO",
+      "Skor kualitas foto + alasan penolakan",
+      "Ekspor CSV + review UI untuk koreksi cepat"
+    ],
+    "stretch": [
+      "Deteksi duplikat via embeddings gambar",
+      "Terjemahan judul multi-bahasa",
+      "Auto-crop & background bersih"
+    ],
+    "metrics": ["Biaya < $0.002 per foto", "≥ 85% tag disetujui tanpa edit", "Throughput 1.000 foto/jam"],
+    "risks": ["Tag halusinasi atribut material", "Foto produk mirip tertukar"],
+    "prompt": "Dari foto produk, isi skema: {category, colors[], materials[], style, seoTitle, altText, qualityScore, rejectionReasons[]}. Hanya sebut atribut yang terlihat. Jika ragu, gunakan null."
+  },
+  {
+    "id": "migration-copilot",
+    "title": "Migration Copilot (v1 → v2)",
+    "tagline": "Refactor berskala repo dengan bukti di setiap langkah.",
+    "category": "Codex / Developer Tools",
+    "difficulty": "Lanjutan",
+    "timeframe": "4 minggu",
+    "summary": "Alat untuk memigrasikan pola kode lama ke API baru (mis. kelas komponen → hooks, callback → async/await) di banyak file: inventaris, rencana per file, patch kecil yang bisa diverifikasi test, dan laporan progres.",
+    "why": "Kasus terbaik untuk agentic coding: banyak file, aturan jelas, verifikasi otomatis lewat test.",
+    "stack": ["TypeScript", "ts-morph", "Codex CLI", "GitHub Actions"],
+    "openaiFeatures": ["Codex CLI", "Batch API", "Structured Outputs"],
+    "mvp": [
+      "Aturan migrasi deklaratif (pola → transformasi)",
+      "Deteksi otomatis file terdampak + estimasi kesulitan",
+      "Patch per file; jalankan test/lint sebelum & sesudah",
+      "Dry-run mode yang hanya menulis laporan"
+    ],
+    "stretch": [
+      "Rollback otomatis jika test merah",
+      "Prioritas file berdasarkan traffic",
+      "Codemod deterministik untuk pola umum"
+    ],
+    "metrics": ["≥ 70% file termigrasi otomatis", "CI hijau di setiap PR", "0 perubahan di luar cakupan"],
+    "risks": ["Perubahan semi-otomatis sulit direview", "Test coverage rendah menyembunyikan regresi"],
+    "prompt": "Terapkan aturan migrasi berikut pada file ini. Ubah seminimal mungkin. Jika tidak yakin atau butuh konteks file lain, kembalikan status='perlu_manual' beserta alasan. Jangan mengubah perilaku publik."
+  }
+]
