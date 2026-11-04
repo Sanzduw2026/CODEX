@@ -238,9 +238,10 @@ function connectSimilar(id) {
     .filter((other) => other.id !== idea.id)
     .map((other) => ({
       idea: other,
-      score: other.category === idea.category ? 2 : 0
+      score: (other.category === idea.category ? 2 : 0)
         + other.stack.filter((s) => idea.stack.includes(s)).length
-        + other.openaiFeatures.filter((f) => idea.openaiFeatures.includes(f)).length,
+        + other.openaiFeatures.filter((f) => idea.openaiFeatures.includes(f)).length
+        + (other.difficulty === idea.difficulty ? 1 : 0),
     }))
     .sort((a, b) => b.score - a.score)
     .slice(0, state.count)
