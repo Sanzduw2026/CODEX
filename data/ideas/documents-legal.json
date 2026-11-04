@@ -1,0 +1,45 @@
+[
+  {
+    "id": "contract-reviewer",
+    "title": "Pemeriksa Kontrak dengan Sorotan Risiko",
+    "tagline": "Tandai klausul berisiko dan jelaskan dalam bahasa manusia.",
+    "category": "Dokumen & Legal",
+    "difficulty": "Lanjutan",
+    "timeframe": "3–4 minggu",
+    "summary": "Alat bantu review kontrak: menandai klausul risiko (denda, terminasi, kepemilikan IP, kerahasiaan), membandingkan dengan playbook perusahaan, dan menghasilkan catatan negosiasi. Selalu dengan disclaimer dan wajib review manusia.",
+    "why": "Domain di mana sitasi + kalibrasi keyakinan sangat penting, dan salah sedikit bisa mahal.",
+    "stack": [
+      "Python",
+      "FastAPI",
+      "pgvector",
+      "React"
+    ],
+    "openaiFeatures": [
+      "Responses API",
+      "Structured Outputs",
+      "File Search",
+      "Prompt caching"
+    ],
+    "mvp": [
+      "Segmentasi klausul + klasifikasi jenis",
+      "Bandingkan dengan playbook (posisi standar perusahaan)",
+      "Output: klausul, risiko, kutipan, saran redline",
+      "Halaman review dengan approve/reject per temuan"
+    ],
+    "stretch": [
+      "Perbandingan dua versi kontrak (diff klausul)",
+      "Ekspor catatan negosiasi ke DOCX",
+      "Kalibrasi keyakinan terhadap review lawyer"
+    ],
+    "metrics": [
+      "Recall klausul risiko ≥ 85%",
+      "Semua temuan punya kutipan",
+      "False alarm < 15%"
+    ],
+    "risks": [
+      "Kesalahan berdampak hukum",
+      "Bias playbook satu yurisdiksi"
+    ],
+    "prompt": "Analisis klausul berikut terhadap playbook. Kembalikan JSON {clauseId, type, riskLevel, quote, deviation, suggestion, confidence}. Jika ragu, turunkan confidence, jangan mengarang isi playbook."
+  }
+]

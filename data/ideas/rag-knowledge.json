@@ -1,0 +1,89 @@
+[
+  {
+    "id": "doc-qa-citations",
+    "title": "Tanya Dokumen, Dapat Kutipan",
+    "tagline": "RAG yang menolak menjawab kalau tidak ada bukti.",
+    "category": "RAG & Knowledge",
+    "difficulty": "Pemula–Menengah",
+    "timeframe": "2 minggu",
+    "summary": "Sistem tanya-jawab di atas kumpulan dokumen internal (PDF, Markdown, Notion export) yang selalu menampilkan kutipan halaman/paragraf, dan menjawab 'tidak tahu' ketika bukti tidak cukup.",
+    "why": "Proyek RAG klasik, tetapi fokus pada bagian yang paling sering diabaikan: sitasi yang benar dan penolakan yang jujur.",
+    "stack": [
+      "Python",
+      "FastAPI",
+      "pgvector",
+      "Next.js"
+    ],
+    "openaiFeatures": [
+      "Embeddings",
+      "Responses API",
+      "Structured Outputs",
+      "File Search"
+    ],
+    "mvp": [
+      "Ingest + chunking sadar-struktur (heading, tabel)",
+      "Hybrid search (BM25 + vektor) dengan rerank",
+      "Jawaban wajib JSON: {answer, citations[], confidence}",
+      "Halaman evaluasi: ukur faithfulness & citation accuracy"
+    ],
+    "stretch": [
+      "Multi-dokumen dengan ACL per pengguna",
+      "Highlight kutipan langsung di PDF viewer",
+      "Cache semantik untuk pertanyaan berulang"
+    ],
+    "metrics": [
+      "Citation accuracy ≥ 95%",
+      "Penolakan tepat pada 20 pertanyaan jebakan",
+      "p95 latensi < 3 s"
+    ],
+    "risks": [
+      "Chunk memotong konteks penting",
+      "Dokumen usang"
+    ],
+    "prompt": "Jawab HANYA dari konteks yang diberikan. Sertakan id kutipan untuk setiap klaim. Jika konteks tidak memadai, kembalikan answer=null dan alasan singkat. Jangan menebak."
+  },
+  {
+    "id": "public-service-rag",
+    "title": "Asisten Informasi Layanan Publik",
+    "tagline": "Jawaban tentang prosedur & syarat, dengan rujukan pasal.",
+    "category": "RAG & Knowledge",
+    "difficulty": "Menengah",
+    "timeframe": "3 minggu",
+    "summary": "Asisten yang menjawab pertanyaan warga soal prosedur layanan (dokumen, biaya, waktu, syarat) dari dokumen resmi, selalu menyertakan rujukan, dan menolak menjawab jika dokumen tidak mencakup — dengan mode 'berkas yang perlu dibawa' yang bisa dicetak.",
+    "why": "Dampak sosial tinggi dan persyaratan jelas: jawaban harus bisa diaudit. Cocok untuk portofolio yang menunjukkan tanggung jawab.",
+    "stack": [
+      "Python",
+      "FastAPI",
+      "pgvector",
+      "Next.js",
+      "Tailwind"
+    ],
+    "openaiFeatures": [
+      "Embeddings",
+      "File Search",
+      "Structured Outputs",
+      "Prompt caching"
+    ],
+    "mvp": [
+      "Ingest dokumen resmi dengan metadata versi & tanggal berlaku",
+      "Jawaban wajib dengan kutipan pasal/halaman",
+      "Kartu 'berkas yang perlu dibawa' yang dapat dicetak",
+      "Halaman evaluasi 50 pertanyaan warga nyata"
+    ],
+    "stretch": [
+      "Multi-instansi (satu deployment per dinas)",
+      "Deteksi dokumen kedaluwarsa",
+      "Mode suara sederhana untuk aksesibilitas"
+    ],
+    "metrics": [
+      "Citation accuracy ≥ 95%",
+      "Jawaban 'tidak tahu' tepat pada 20 kasus di luar cakupan",
+      "Waktu muat < 2 s"
+    ],
+    "risks": [
+      "Dokumen tidak resmi masuk indeks",
+      "Pengguna menganggap ini nasihat hukum"
+    ],
+    "prompt": "Jawab hanya berdasarkan dokumen yang diberikan, sertakan rujukan {docId, halaman, kutipan}. Jika tidak ada dasar, jawab bahwa informasi tidak ditemukan pada dokumen resmi yang tersedia dan sarankan kanal resmi."
+  }
+]

@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Ide Codex — generator ide proyek OpenAI acak</title>
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Ide Codex — generator ide proyek OpenAI acak" />
+  <meta property="og:description" content="26 ide proyek OpenAI/Codex terkurasi: putar acak, filter, lalu ekspor jadi brief Markdown/JSON/CSV." />
+  <meta property="og:image" content="/assets/og-image.svg" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="description" content="Generator ide proyek OpenAI/Codex secara acak: 26 ide terkurasi dalam 11 kategori, lengkap dengan cakupan MVP, target terukur, risiko, dan prompt awal." />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%230f172a'/%3E%3Cpath d='M9 21l7-10 7 10' stroke='%23a3e635' stroke-width='3' fill='none' stroke-linecap='round'/%3E%3C/svg%3E" />
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+  <div class="grain" aria-hidden="true"></div>
+
+  <header class="site-header">
+    <a class="brand" href="/">
+      <span class="brand-mark">{ }</span>
+      <span class="brand-text">Ide Codex<small>mesin ide proyek OpenAI</small></span>
+    </a>
+    <nav class="site-nav">
+      <a href="#acak">Acak</a>
+      <a href="#jelajah">Jelajah</a>
+      <a href="#cara" class="nav-ghost">Cara pakai</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero" id="acak">
+      <p class="eyebrow">26 ide terkurasi · tanpa dependensi · siap dikembangkan</p>
+      <h1>Bingung mau bikin apa?<br /><em>Putar roda idenya.</em></h1>
+      <p class="lede">
+        Setiap ide sudah dipikirkan sampai level MVP: cakupan fitur, target terukur,
+        risiko yang realistis, dan prompt awal untuk mulai coding dengan Codex.
+      </p>
+
+      <form class="controls" id="controls" autocomplete="off">
+        <div class="control control-search">
+          <label for="search">Cari ide</label>
+          <input id="search" name="search" type="search" placeholder="mis. RAG, suara, test, spreadsheet…" />
+        </div>
+        <div class="control">
+          <label for="difficulty">Tingkat</label>
+          <select id="difficulty" name="difficulty">
+            <option value="">Semua tingkat</option>
+            <option>Pemula</option>
+            <option>Pemula–Menengah</option>
+            <option>Menengah</option>
+            <option>Lanjutan</option>
+          </select>
+        </div>
+        <div class="control">
+          <label for="count">Jumlah</label>
+          <select id="count" name="count">
+            <option value="1">1 ide</option>
+            <option value="2" selected>2 ide</option>
+            <option value="3">3 ide</option>
+            <option value="5">5 ide</option>
+          </select>
+        </div>
+        <button class="btn btn-primary" type="submit">
+          <span aria-hidden="true">⟳</span> Acak sekarang
+        </button>
+      </form>
+
+      <div class="chips" id="categoryChips" aria-label="Filter kategori">
+        <button type="button" class="chip is-active" data-category="">Semua</button>
+      </div>
+      <p class="hint" id="poolHint">Tekan <kbd>R</kbd> kapan saja untuk mengacak ulang.</p>
+    </section>
+
+    <section class="results" id="results" aria-live="polite" aria-busy="false">
+      <div class="empty-state" id="emptyState">
+        <p>Belum ada ide yang diputar.</p>
+        <p class="muted">Klik <strong>Acak sekarang</strong> atau tekan <kbd>R</kbd>.</p>
+      </div>
+    </section>
+
+    <section class="explorer" id="jelajah">
+      <div class="section-head">
+        <h2>Jelajahi semua ide</h2>
+        <p class="muted" id="explorerCount"></p>
+      </div>
+      <div class="table-wrap">
+        <table class="idea-table">
+          <thead>
+            <tr>
+              <th>Ide</th>
+              <th>Kategori</th>
+              <th>Tingkat</th>
+              <th>Estimasi</th>
+              <th>Fitur OpenAI</th>
+            </tr>
+          </thead>
+          <tbody id="explorerBody"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="howto" id="cara">
+      <h2>Cara pakai</h2>
+      <div class="howto-grid">
+        <article>
+          <h3>1 · Pilih benih</h3>
+          <p>Pakai filter kategori atau tingkat. Kalau masih ragu, biarkan acak yang memilih — justru itu gunanya.</p>
+        </article>
+        <article>
+          <h3>2 · Baca sampai target</h3>
+          <p>Bagian <em>Target terukur</em> adalah definisi selesai. Kalau tidak bisa diukur, proyeknya belum layak dimulai.</p>
+        </article>
+        <article>
+          <h3>3 · Kurangi, jangan tambah</h3>
+          <p>Potong MVP sampai jadi satu alur utama. Fitur tambahan masuk daftar pengembangan lanjutan.</p>
+        </article>
+        <article>
+          <h3>4 · Mulai dari prompt</h3>
+          <p>Salin prompt awal ke Codex, lampirkan struktur repo, lalu minta rencana sebelum kode.</p>
+        </article>
+      </div>
+      <div class="cli-note">
+        <h3>Suka terminal? Ada CLI-nya.</h3>
+        <pre><code>node cli.js --count 3 --difficulty Menengah
+node cli.js --seed klinik --format md --out brief.md
+node cli.js --list</code></pre>
+        <p class="muted">API lokal: <code>GET /api/random?count=2&amp;category=RAG%20%26%20Knowledge</code></p>
+        <p class="muted">Ingin ikut mengisi katalog? Baca <a href="https://github.com/Sanzduw2026/CODEX/blob/main/CONTRIBUTING.md">CONTRIBUTING.md</a>.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>Dibuat untuk eksperimen pribadi. Semua ide, target, dan risiko adalah titik awal — verifikasi sebelum dipakai di produksi.</p>
+    <p class="muted">Data lokal di <code>data/ideas.json</code> · <a href="/api/meta">/api/meta</a></p>
+  </footer>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script src="/app.js"></script>
+</body>
+</html>

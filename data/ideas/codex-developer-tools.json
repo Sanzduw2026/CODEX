@@ -1,0 +1,257 @@
+[
+  {
+    "id": "codex-repo-onboarding",
+    "title": "Codex Repo Onboarding Copilot",
+    "tagline": "Ubah repo asing jadi peta pengetahuan dalam 5 menit.",
+    "category": "Codex / Developer Tools",
+    "difficulty": "Menengah",
+    "timeframe": "2–3 minggu",
+    "summary": "CLI + web report yang membaca sebuah repositori, memetakan arsitektur, titik masuk, alur data, dan 'jebakan' (config tersembunyi, migrasi DB, env wajib), lalu menulis dokumen onboarding yang bisa dibaca manusia dan dipakai ulang oleh Codex sebagai konteks.",
+    "why": "Onboarding repo adalah tugas pertama yang paling sering diminta ke Codex. Output yang terstruktur (bukan chat) membuat hasilnya bisa direview tim dan dipakai ulang.",
+    "stack": [
+      "Node.js",
+      "TypeScript",
+      "Codex CLI",
+      "SQLite",
+      "Mermaid"
+    ],
+    "openaiFeatures": [
+      "Codex CLI",
+      "Structured Outputs",
+      "Embeddings",
+      "Prompt caching"
+    ],
+    "mvp": [
+      "Index file kunci: manifest, entrypoint, CI, migrasi, env example",
+      "Ringkas tiap modul + diagram arsitektur Mermaid",
+      "Generate ONBOARDING.md + 'first tasks' untuk kontributor baru",
+      "Skor keyakinan per klaim, tandai bagian yang perlu dicek manusia"
+    ],
+    "stretch": [
+      "Watch mode: perbarui dokumen saat PR merge",
+      "Band context per modul agar hemat token",
+      "Reviewer mode: bandingkan dokumen vs kode terkini"
+    ],
+    "metrics": [
+      "Waktu onboarding < 10 menit",
+      "≥ 80% klaim diverifikasi benar",
+      "Biaya analisis < $0.05 per repo"
+    ],
+    "risks": [
+      "Repo besar bisa melebihi konteks",
+      "Klaim halusinasi soal perilaku runtime"
+    ],
+    "prompt": "Kamu adalah arsitek perangkat lunak. Dari daftar file dan isi modul yang saya berikan, hasilkan ringkasan arsitektur dalam JSON: entrypoints, modules, dataFlow, risks, openQuestions. Setiap klaim harus menyertakan file sebagai bukti."
+  },
+  {
+    "id": "screenshot-to-app",
+    "title": "Screenshot → Aplikasi Jalan",
+    "tagline": "Dari gambar desain ke komponen React yang bisa dites.",
+    "category": "Codex / Developer Tools",
+    "difficulty": "Menengah",
+    "timeframe": "3 minggu",
+    "summary": "Pipeline yang mengubah screenshot UI menjadi komponen React + Tailwind, lengkap dengan test visual: render ulang, bandingkan screenshot, dan iterasi sampai selisih pixel di bawah ambang.",
+    "why": "Memaksa loop agent yang benar-benar tertutup: generate → render → ukur → perbaiki. Skill yang sama dipakai untuk semua tugas coding agent.",
+    "stack": [
+      "TypeScript",
+      "Playwright",
+      "Vite",
+      "Codex CLI"
+    ],
+    "openaiFeatures": [
+      "Vision input",
+      "Codex CLI",
+      "Structured Outputs"
+    ],
+    "mvp": [
+      "Ekstraksi layout & design token kasar dari gambar",
+      "Generate komponen + storybook/story per komponen",
+      "Render headless, diff screenshot, hitung skor kemiripan",
+      "Maksimal N iterasi perbaikan dengan riwayat diff"
+    ],
+    "stretch": [
+      "Mode responsif (mobile/desktop)",
+      "Ekstraksi aset & ikon otomatis",
+      "Ekspor ke shadcn/ui"
+    ],
+    "metrics": [
+      "Skor kemiripan ≥ 0.9 pada 10 desain uji",
+      "Semua komponen punya test render",
+      "< 5 iterasi rata-rata"
+    ],
+    "risks": [
+      "Desain ambigu/bergerak",
+      "Font & aset tidak tersedia"
+    ],
+    "prompt": "Bandingkan dua screenshot. Daftar perbedaan visual yang terlihat (spacing, ukuran font, warna, radius, alignment) dalam JSON, urut dari yang paling mengganggu. Jangan menyarankan perbaikan CSS dulu."
+  },
+  {
+    "id": "test-writer-sweep",
+    "title": "Codex Test Sweep",
+    "tagline": "Naikkan coverage tanpa membuat test palsu.",
+    "category": "Codex / Developer Tools",
+    "difficulty": "Menengah",
+    "timeframe": "2–3 minggu",
+    "summary": "Tool yang menemukan fungsi tanpa test, memprioritaskan yang paling berisiko, menulis test, lalu memverifikasi test benar-benar gagal saat kode dirusak (mutation check).",
+    "why": "Mengajarkan verifikasi keras: test yang selalu hijau tidak bernilai. Mutation testing membuat agen tidak bisa curang.",
+    "stack": [
+      "TypeScript",
+      "Vitest",
+      "StrykerJS",
+      "Codex CLI"
+    ],
+    "openaiFeatures": [
+      "Codex CLI",
+      "Batch API",
+      "Structured Outputs"
+    ],
+    "mvp": [
+      "Peta coverage per fungsi + skor risiko sederhana",
+      "Generate test + jalankan; hanya simpan yang lolos",
+      "Mutation check: test harus gagal saat mutan dibuat",
+      "PR otomatis dengan ringkasan + batas jumlah perubahan"
+    ],
+    "stretch": [
+      "Belajar gaya test repo dari contoh yang ada",
+      "Dukungan Python (pytest + mutmut)",
+      "Kuota biaya per repo"
+    ],
+    "metrics": [
+      "Coverage +15 poin",
+      "≥ 70% test bertahan mutation check",
+      "Tidak ada perubahan kode produksi"
+    ],
+    "risks": [
+      "Test rapuh terhadap implementasi",
+      "Banjir PR"
+    ],
+    "prompt": "Tulis test untuk fungsi berikut. Test harus gagal jika logika berubah (hindari assertion trivial). Gunakan gaya test yang sudah ada di repo. Jelaskan skenario yang tidak bisa dites tanpa refactor."
+  },
+  {
+    "id": "migration-copilot",
+    "title": "Migration Copilot (v1 → v2)",
+    "tagline": "Refactor berskala repo dengan bukti di setiap langkah.",
+    "category": "Codex / Developer Tools",
+    "difficulty": "Lanjutan",
+    "timeframe": "4 minggu",
+    "summary": "Alat untuk memigrasikan pola kode lama ke API baru (mis. kelas komponen → hooks, callback → async/await) di banyak file: inventaris, rencana per file, patch kecil yang bisa diverifikasi test, dan laporan progres.",
+    "why": "Kasus terbaik untuk agentic coding: banyak file, aturan jelas, verifikasi otomatis lewat test.",
+    "stack": [
+      "TypeScript",
+      "ts-morph",
+      "Codex CLI",
+      "GitHub Actions"
+    ],
+    "openaiFeatures": [
+      "Codex CLI",
+      "Batch API",
+      "Structured Outputs"
+    ],
+    "mvp": [
+      "Aturan migrasi deklaratif (pola → transformasi)",
+      "Deteksi otomatis file terdampak + estimasi kesulitan",
+      "Patch per file; jalankan test/lint sebelum & sesudah",
+      "Dry-run mode yang hanya menulis laporan"
+    ],
+    "stretch": [
+      "Rollback otomatis jika test merah",
+      "Prioritas file berdasarkan traffic",
+      "Codemod deterministik untuk pola umum"
+    ],
+    "metrics": [
+      "≥ 70% file termigrasi otomatis",
+      "CI hijau di setiap PR",
+      "0 perubahan di luar cakupan"
+    ],
+    "risks": [
+      "Perubahan semi-otomatis sulit direview",
+      "Test coverage rendah menyembunyikan regresi"
+    ],
+    "prompt": "Terapkan aturan migrasi berikut pada file ini. Ubah seminimal mungkin. Jika tidak yakin atau butuh konteks file lain, kembalikan status='perlu_manual' beserta alasan. Jangan mengubah perilaku publik."
+  },
+  {
+    "id": "regression-suite-miner",
+    "title": "Penambang Test Regresi dari Bug Lama",
+    "tagline": "Setiap bug yang pernah terjadi jadi penjaga permanen.",
+    "category": "Codex / Developer Tools",
+    "difficulty": "Menengah",
+    "timeframe": "3 minggu",
+    "summary": "Tool yang membaca riwayat issue dan PR perbaikan bug, lalu menyusun test regresi yang meniru kondisi bug tersebut — dan memvalidasi bahwa test benar-benar gagal pada kode sebelum perbaikan.",
+    "why": "Repositori yang matang punya bug lama sebagai aset. Ini mengubah arsip menjadi pengaman, dan melatih verifikasi berbasis riwayat, bukan tebakan.",
+    "stack": [
+      "TypeScript",
+      "GitHub API",
+      "Vitest",
+      "Codex CLI"
+    ],
+    "openaiFeatures": [
+      "Codex CLI",
+      "Structured Outputs",
+      "Batch API"
+    ],
+    "mvp": [
+      "Klaster issue bug + commit perbaikannya",
+      "Reproduksi kondisi bug di checkout commit sebelum fix",
+      "Generate test, jalankan di dua versi (sebelum/sesudah)",
+      "Laporan: bug tanpa test regresi, urut risiko"
+    ],
+    "stretch": [
+      "Backfill otomatis ke PR baru",
+      "Deteksi test yang sudah usang",
+      "Skor cakupan per area bug"
+    ],
+    "metrics": [
+      "≥ 60% bug lama berhasil dibuatkan test",
+      "Test gagal di versi lama & lolos di versi baru",
+      "0 flaky test hasil generate"
+    ],
+    "risks": [
+      "Commit perbaikan sulit dipetakan",
+      "Lingkungan reproduksi berbeda"
+    ],
+    "prompt": "Dari deskripsi bug dan diff perbaikan, tulis satu test minimal yang gagal tanpa perbaikan dan lolos dengan perbaikan. Jangan menguji detail implementasi. Jika reproduksi butuh data rahasia, tandai blocked."
+  },
+  {
+    "id": "pr-review-coach",
+    "title": "Coach Review PR untuk Kontributor Baru",
+    "tagline": "Ulasan yang mendidik, bukan menghakimi.",
+    "category": "Codex / Developer Tools",
+    "difficulty": "Menengah",
+    "timeframe": "2–3 minggu",
+    "summary": "Bot GitHub Actions yang mengulas PR dengan tiga tingkat nada: ringkasan untuk reviewer sibuk, catatan untuk penulis, dan penjelasan konsep untuk kontributor pertama kali — plus daftar perbaikan yang bisa dijalankan Codex.",
+    "why": "Proyek ini memperbaiki komunitas open source secara langsung, dan menjadi contoh nyata pemakaian Codex di alur review — persis yang dicari program maintainer.",
+    "stack": [
+      "TypeScript",
+      "GitHub Actions",
+      "Octokit",
+      "Codex CLI"
+    ],
+    "openaiFeatures": [
+      "Codex CLI",
+      "Structured Outputs",
+      "Batch API",
+      "Prompt caching"
+    ],
+    "mvp": [
+      "Ringkasan diff + risiko (kontrak berubah, migrasi, rahasia)",
+      "Deteksi kontributor pertama → nada lebih menjelaskan",
+      "Komentar terstruktur: blocking / saran / pujian",
+      "Mode dry-run untuk menjaga biaya"
+    ],
+    "stretch": [
+      "Label otomatis berdasarkan area file",
+      "Ringkasan mingguan untuk maintainer",
+      "Saran test yang hilang per perubahan"
+    ],
+    "metrics": [
+      "≥ 70% komentar dinilai berguna oleh kontributor",
+      "Biaya review < $0.05 per PR",
+      "Tidak ada komentar menyinggung kepribadian"
+    ],
+    "risks": [
+      "Komentar berisik pada PR kecil",
+      "Kebocoran kode ke layanan pihak ketiga"
+    ],
+    "prompt": "Ulas diff ini untuk kontributor baru. Hasilkan JSON {summary, blocking[], suggestions[], praise[], conceptsToExplain[]}. Batasi 5 item per kategori. Jangan menyebut penulis, fokus pada kode."
+  }
+]

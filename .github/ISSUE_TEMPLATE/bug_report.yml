@@ -1,0 +1,60 @@
+name: Laporan bug
+description: Ada yang tidak berjalan sesuai dokumentasi
+title: "bug: "
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Terima kasih sudah melapor. Untuk masalah keamanan, **jangan** pakai formulir ini —
+        ikuti [SECURITY.md](../blob/main/SECURITY.md).
+  - type: textarea
+    id: apa
+    attributes:
+      label: Apa yang terjadi
+      description: Jelaskan hasil yang kamu lihat.
+    validations:
+      required: true
+  - type: textarea
+    id: harapan
+    attributes:
+      label: Yang diharapkan
+    validations:
+      required: true
+  - type: textarea
+    id: langkah
+    attributes:
+      label: Langkah reproduksi
+      placeholder: |
+        1. npm start
+        2. buka http://localhost:4173
+        3. klik Acak dengan filter "Lanjutan"
+        4. ...
+    validations:
+      required: true
+  - type: dropdown
+    id: area
+    attributes:
+      label: Area
+      options:
+        - UI (public/)
+        - API (server.js)
+        - CLI (cli.js)
+        - Data ide (data/ideas/)
+        - Dokumentasi
+    validations:
+      required: true
+  - type: input
+    id: versi
+    attributes:
+      label: Versi Node.js dan OS
+      placeholder: "Node 22.11 / macOS 15"
+    validations:
+      required: true
+  - type: checkboxes
+    id: cek
+    attributes:
+      label: Konfirmasi
+      options:
+        - label: Saya sudah menjalankan `npm test` dan menyertakan hasilnya bila gagal
+          required: true

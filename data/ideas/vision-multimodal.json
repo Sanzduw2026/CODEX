@@ -1,0 +1,87 @@
+[
+  {
+    "id": "image-catalog-tagger",
+    "title": "Katalog Foto Produk Otomatis",
+    "tagline": "Dari 5.000 foto mentah ke katalog yang bisa dicari.",
+    "category": "Vision & Multimodal",
+    "difficulty": "Pemula–Menengah",
+    "timeframe": "2 minggu",
+    "summary": "Tool batch yang memberi tag, judul, dan deskripsi SEO untuk foto produk, mendeteksi foto jelek (blur, background kotor), dan mengelompokkan varian warna. Output CSV siap impor ke toko online.",
+    "why": "Nilai bisnis jelas, dan melatih batch processing dan kontrol kualitas output dalam skala besar dengan biaya terkendali.",
+    "stack": [
+      "Python",
+      "FastAPI",
+      "Next.js",
+      "S3"
+    ],
+    "openaiFeatures": [
+      "Vision input",
+      "Batch API",
+      "Structured Outputs",
+      "Embeddings"
+    ],
+    "mvp": [
+      "Antrean batch dengan retry & batas biaya",
+      "Skema tag: kategori, warna, material, gaya, kata kunci SEO",
+      "Skor kualitas foto + alasan penolakan",
+      "Ekspor CSV + review UI untuk koreksi cepat"
+    ],
+    "stretch": [
+      "Deteksi duplikat via embeddings gambar",
+      "Terjemahan judul multi-bahasa",
+      "Auto-crop & background bersih"
+    ],
+    "metrics": [
+      "Biaya < $0.002 per foto",
+      "≥ 85% tag disetujui tanpa edit",
+      "Throughput 1.000 foto/jam"
+    ],
+    "risks": [
+      "Tag halusinasi atribut material",
+      "Foto produk mirip tertukar"
+    ],
+    "prompt": "Dari foto produk, isi skema: {category, colors[], materials[], style, seoTitle, altText, qualityScore, rejectionReasons[]}. Hanya sebut atribut yang terlihat. Jika ragu, gunakan null."
+  },
+  {
+    "id": "accessibility-auditor",
+    "title": "Auditor Aksesibilitas Berbasis Screenshot",
+    "tagline": "Temukan masalah kontras dan fokus sebelum pengguna menemukannya.",
+    "category": "Vision & Multimodal",
+    "difficulty": "Menengah",
+    "timeframe": "2–3 minggu",
+    "summary": "Aplikasi yang memindai halaman (screenshot + DOM), menemukan pelanggaran aksesibilitas yang paling berdampak, menjelaskan dampaknya bagi pengguna, dan memberi potongan perbaikan CSS/ARIA yang bisa diverifikasi ulang.",
+    "why": "Kombinasi vision + DOM + aturan deterministik adalah kasus multimodal yang jarang dibuat orang, padahal jelas manfaatnya.",
+    "stack": [
+      "TypeScript",
+      "Playwright",
+      "axe-core",
+      "Next.js"
+    ],
+    "openaiFeatures": [
+      "Vision input",
+      "Structured Outputs",
+      "Responses API"
+    ],
+    "mvp": [
+      "Pindai halaman dengan axe-core + screenshot state fokus",
+      "Prioritaskan temuan berdasarkan dampak ke pengguna",
+      "Jelaskan masalah dalam bahasa non-teknis",
+      "Generate patch CSS/ARIA dan verifikasi ulang otomatis"
+    ],
+    "stretch": [
+      "Uji alur keyboard end-to-end",
+      "Perbandingan antar-rilis (regresi aksesibilitas)",
+      "Laporan PDF untuk klien"
+    ],
+    "metrics": [
+      "≥ 90% temuan axe-core tercakup",
+      "Patch terverifikasi lolos pada ≥ 70% kasus",
+      "Waktu audit 1 halaman < 20 s"
+    ],
+    "risks": [
+      "Screenshot tidak menangkap semua state",
+      "Saran ARIA yang justru salah"
+    ],
+    "prompt": "Dari temuan axe-core dan screenshot, pilih 5 masalah paling berdampak. Untuk setiap masalah: penjelasan untuk desainer, siapa yang terdampak, dan patch minimal. Tandai jika patch butuh verifikasi manual dengan screen reader."
+  }
+]

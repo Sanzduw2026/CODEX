@@ -1,0 +1,29 @@
+name: Validasi data ide
+
+on:
+  pull_request:
+    paths: ["data/**"]
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    name: Skema & ekspor
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Validasi skema ide
+        run: node --test tests/ideas.test.js
+
+      - name: Pastikan ekspor markdown & csv berhasil
+        run: |
+          node cli.js --format md --out /tmp/brief.md
+          node cli.js --format csv --out /tmp/ide.csv
+          test -s /tmp/brief.md
+          test -s /tmp/ide.csv
+          echo "Total ide: $(node -e "console.log(require('./lib/ideas').loadIdeas().length)")"

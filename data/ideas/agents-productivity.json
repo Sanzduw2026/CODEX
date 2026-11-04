@@ -1,0 +1,130 @@
+[
+  {
+    "id": "meeting-to-tasks",
+    "title": "Rapat → Tiket yang Siap Dikerjakan",
+    "tagline": "Notulen otomatis yang berakhir jadi backlog, bukan PDF terlupakan.",
+    "category": "Produktivitas & Agen",
+    "difficulty": "Pemula–Menengah",
+    "timeframe": "2 minggu",
+    "summary": "Rekam/unggah rapat, hasilkan transkrip, ringkasan keputusan, dan daftar action item dengan owner + tenggat, lalu dorong ke GitHub Issues atau Linear lewat tool call dengan konfirmasi manusia.",
+    "why": "Kasus pemakaian agen yang langsung terasa dampaknya dan melatih hal penting: approval sebelum aksi destruktif.",
+    "stack": [
+      "Python",
+      "Whisper/Transcription API",
+      "FastAPI",
+      "GitHub API"
+    ],
+    "openaiFeatures": [
+      "Transcription",
+      "Structured Outputs",
+      "Function calling",
+      "Responses API"
+    ],
+    "mvp": [
+      "Transkripsi dengan timestamp per pembicara",
+      "Ekstraksi decisions + action items (JSON schema ketat)",
+      "Halaman review: edit owner/tenggat sebelum dibuat",
+      "Push ke GitHub Issues via tool dengan idempotency key"
+    ],
+    "stretch": [
+      "Deteksi action item yang tidak pernah ditutup",
+      "Ringkasan mingguan per tim",
+      "Integrasi Slack untuk konfirmasi"
+    ],
+    "metrics": [
+      "Precision action item ≥ 80%",
+      "0 duplikasi tiket",
+      "Review < 3 menit per rapat"
+    ],
+    "risks": [
+      "Nama & istilah salah dengar",
+      "Action item implisit tidak tertangkap"
+    ],
+    "prompt": "Dari transkrip, hasilkan JSON: decisions[], actionItems[{title, owner|null, dueDate|null, sourceQuote}]. Hanya sertakan item yang benar-benar disepakati. Jika owner tidak disebut, isi null. Sertakan kutipan asli."
+  },
+  {
+    "id": "multilingual-support",
+    "title": "Copilot CS Multibahasa untuk UMKM",
+    "tagline": "Balasan bahasa Indonesia, Inggris, dan daerah — dengan nada yang tepat.",
+    "category": "Produktivitas & Agen",
+    "difficulty": "Pemula",
+    "timeframe": "1–2 minggu",
+    "summary": "Asisten untuk pemilik usaha kecil: mengubah pertanyaan pelanggan (WhatsApp/IG) menjadi draf balasan yang sopan, singkat, sesuai kebijakan toko, dalam bahasa pelanggan, plus tombol 'jelaskan kenapa'.",
+    "why": "Cepat dibangun, langsung berguna, dan melatih hal yang sering diremehkan: nada, konteks lokal, dan konsistensi kebijakan.",
+    "stack": [
+      "Next.js",
+      "SQLite",
+      "Tailwind"
+    ],
+    "openaiFeatures": [
+      "Responses API",
+      "Structured Outputs",
+      "Prompt caching",
+      "Moderation"
+    ],
+    "mvp": [
+      "Profil toko: kebijakan retur, jam buka, ongkir, nada bicara",
+      "Generate 3 opsi balasan (formal/santai/ringkas)",
+      "Deteksi bahasa otomatis + jaga istilah produk",
+      "Tombol eskalasi: 'ini perlu manusia'"
+    ],
+    "stretch": [
+      "Template jawaban yang dipelajari dari riwayat",
+      "Analitik pertanyaan berulang",
+      "WhatsApp Business API"
+    ],
+    "metrics": [
+      "Waktu balas turun 50%",
+      "≥ 90% draf dipakai dengan sedikit edit",
+      "0 pelanggaran kebijakan toko"
+    ],
+    "risks": [
+      "Janji yang tidak boleh dibuat model",
+      "Sapaan yang terasa robotik"
+    ],
+    "prompt": "Buat 3 draf balasan CS untuk pelanggan. Bahasa mengikuti bahasa pelanggan. Jangan menjanjikan hal di luar kebijakan toko berikut. Kembalikan JSON {formal, casual, brief, needsHuman}."
+  },
+  {
+    "id": "whatsapp-order-agent",
+    "title": "Agen Pesanan WhatsApp untuk UMKM",
+    "tagline": "Chat pelanggan jadi struk, bukan tumpukan chat belum dibaca.",
+    "category": "Produktivitas & Agen",
+    "difficulty": "Menengah",
+    "timeframe": "2–3 minggu",
+    "summary": "Agen yang membaca chat WhatsApp, memahami pesanan (produk, jumlah, alamat), mengecek stok & ongkir, membuat draf pesanan, dan meminta konfirmasi manusia sebelum apa pun ditagihkan.",
+    "why": "Salah satu otomasi dengan nilai paling langsung di pasar Indonesia, sekaligus latihan bagus untuk function calling + guardrail konfirmasi.",
+    "stack": [
+      "Node.js",
+      "FastAPI",
+      "PostgreSQL",
+      "Next.js"
+    ],
+    "openaiFeatures": [
+      "Function calling",
+      "Structured Outputs",
+      "Responses API",
+      "Prompt caching"
+    ],
+    "mvp": [
+      "Ekstraksi pesanan ke JSON: item, jumlah, varian, alamat, catatan",
+      "Tool cek stok + hitung ongkir dengan idempotency key",
+      "Halaman konfirmasi: setujui, ubah, atau tolak per pesanan",
+      "Log percakapan + alasan penolakan untuk perbaikan prompt"
+    ],
+    "stretch": [
+      "Deteksi pelanggan berulang dan riwayat pesanan",
+      "Rekomendasi upsell yang tidak mengganggu",
+      "Dukungan bahasa campuran Indonesia–Inggris–daerah"
+    ],
+    "metrics": [
+      "≥ 80% pesanan terekstrak benar tanpa edit",
+      "0 pesanan terkirim tanpa konfirmasi",
+      "Waktu proses < 15 detik"
+    ],
+    "risks": [
+      "Nomor/alamat salah ekstraksi",
+      "Pelanggan menulis sangat singkat atau singkatan lokal"
+    ],
+    "prompt": "Ekstrak pesanan dari chat berikut ke JSON {items[{name, qty, variant}], address, phone, notes, confidence, missing[]}. Jangan menebak item yang tidak disebut; masukkan ke missing. Jika ragu, turunkan confidence."
+  }
+]

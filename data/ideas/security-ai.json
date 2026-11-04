@@ -1,0 +1,45 @@
+[
+  {
+    "id": "guardrail-firewall",
+    "title": "Firewall Prompt untuk Aplikasi Produksi",
+    "tagline": "Lapisan pertahanan sebelum permintaan menyentuh model.",
+    "category": "Keamanan AI",
+    "difficulty": "Lanjutan",
+    "timeframe": "3–4 minggu",
+    "summary": "Middleware yang memeriksa input & output: prompt injection, kebocoran PII, upaya eksfiltrasi system prompt, dan output tidak aman. Dilengkapi dataset serangan, skor blokir, dan laporan false positive.",
+    "why": "Setiap aplikasi AI produksi butuh ini. Kombinasi classifier kecil, aturan deterministik, dan uji regresi keamanan.",
+    "stack": [
+      "TypeScript",
+      "FastAPI",
+      "Redis",
+      "Grafana"
+    ],
+    "openaiFeatures": [
+      "Moderation",
+      "Structured Outputs",
+      "Guardrails",
+      "Embeddings"
+    ],
+    "mvp": [
+      "Deteksi PII (regex + model) dengan redaksi bisa-dikonfigurasi",
+      "Klasifikasi input berisiko dengan label + alasan",
+      "Aturan output: cek kode berbahaya, kebocoran rahasia",
+      "Dataset serangan v1 (≥ 100 kasus) + skor deteksi"
+    ],
+    "stretch": [
+      "Mode shadow: log saja sebelum enforce",
+      "Uji adversarial otomatis tiap rilis",
+      "Dashboard false positive per aturan"
+    ],
+    "metrics": [
+      "Recall ≥ 90% pada dataset serangan",
+      "False positive < 3%",
+      "Overhead < 40 ms p95"
+    ],
+    "risks": [
+      "Terlalu agresif memblokir pengguna sah",
+      "Serangan baru lolos"
+    ],
+    "prompt": "Klasifikasikan input pengguna. Kembalikan JSON {risk: low|medium|high, categories[], reason, redacted}. Kategori: injection, pii, illegal, self-harm, exfiltration. Alasan maksimal dua kalimat."
+  }
+]
