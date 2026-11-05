@@ -32,9 +32,9 @@
       "Auto-crop & background bersih"
     ],
     "metrics": [
-      "Biaya < $0.002 per foto",
-      "≥ 85% tag disetujui tanpa edit",
-      "Throughput 1.000 foto/jam"
+      "Biaya < $0.002 per foto → bukti: laporan biaya per run dari logger token",
+      "≥ 85% tag disetujui tanpa edit → bukti: survei singkat pasca-pakai 10 responden",
+      "Throughput 1.000 foto/jam → bukti: uji awal-sampai-selesai yang direkam"
     ],
     "risks": [
       "Tag halusinasi atribut material",
@@ -74,9 +74,9 @@
       "Laporan PDF untuk klien"
     ],
     "metrics": [
-      "≥ 90% temuan axe-core tercakup",
-      "Patch terverifikasi lolos pada ≥ 70% kasus",
-      "Waktu audit 1 halaman < 20 s"
+      "≥ 90% temuan axe-core tercakup → bukti: label emas 50+ kasus di folder eval",
+      "Patch terverifikasi lolos pada ≥ 70% kasus → bukti: laporan test & mutation di CI",
+      "Waktu audit 1 halaman < 20 s → bukti: uji awal-sampai-selesai yang direkam"
     ],
     "risks": [
       "Screenshot tidak menangkap semua state",

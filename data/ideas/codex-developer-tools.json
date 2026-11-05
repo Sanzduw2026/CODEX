@@ -33,9 +33,9 @@
       "Reviewer mode: bandingkan dokumen vs kode terkini"
     ],
     "metrics": [
-      "Waktu onboarding < 10 menit",
-      "≥ 80% klaim diverifikasi benar",
-      "Biaya analisis < $0.05 per repo"
+      "Waktu onboarding < 10 menit → bukti: uji awal-sampai-selesai yang direkam",
+      "≥ 80% klaim diverifikasi benar → bukti: survei singkat pasca-pakai 10 responden",
+      "Biaya analisis < $0.05 per repo → bukti: laporan biaya per run dari logger token"
     ],
     "risks": [
       "Repo besar bisa melebihi konteks",
@@ -75,9 +75,9 @@
       "Ekspor ke shadcn/ui"
     ],
     "metrics": [
-      "Skor kemiripan ≥ 0.9 pada 10 desain uji",
-      "Semua komponen punya test render",
-      "< 5 iterasi rata-rata"
+      "Skor kemiripan ≥ 0.9 pada 10 desain uji → bukti: rekonsiliasi otomatis di CI",
+      "Semua komponen punya test render (100%) → bukti: laporan test & mutation di CI",
+      "< 5 iterasi rata-rata → bukti: laporan test & mutation di CI"
     ],
     "risks": [
       "Desain ambigu/bergerak",
@@ -117,9 +117,9 @@
       "Kuota biaya per repo"
     ],
     "metrics": [
-      "Coverage +15 poin",
-      "≥ 70% test bertahan mutation check",
-      "Tidak ada perubahan kode produksi"
+      "Coverage +15 poin → bukti: laporan test & mutation di CI",
+      "≥ 70% test bertahan mutation check → bukti: laporan test & mutation di CI",
+      "Tidak ada perubahan kode produksi → bukti: cek otomatis di setiap PR (lint/aturan repo)"
     ],
     "risks": [
       "Test rapuh terhadap implementasi",
@@ -159,9 +159,9 @@
       "Codemod deterministik untuk pola umum"
     ],
     "metrics": [
-      "≥ 70% file termigrasi otomatis",
-      "CI hijau di setiap PR",
-      "0 perubahan di luar cakupan"
+      "≥ 70% file termigrasi otomatis → bukti: sampel 50 item hasil model yang diaudit manual",
+      "CI hijau pada 100% PR migrasi → bukti: laporan test & mutation di CI",
+      "0 perubahan di luar cakupan → bukti: rekonsiliasi otomatis di CI"
     ],
     "risks": [
       "Perubahan semi-otomatis sulit direview",
@@ -201,9 +201,9 @@
       "Skor cakupan per area bug"
     ],
     "metrics": [
-      "≥ 60% bug lama berhasil dibuatkan test",
-      "Test gagal di versi lama & lolos di versi baru",
-      "0 flaky test hasil generate"
+      "≥ 60% bug lama berhasil dibuatkan test → bukti: laporan test & mutation di CI",
+      "Test gagal di versi lama & lolos di versi baru (100%) → bukti: laporan test & mutation di CI",
+      "0 flaky test hasil generate → bukti: laporan test & mutation di CI"
     ],
     "risks": [
       "Commit perbaikan sulit dipetakan",
@@ -244,9 +244,9 @@
       "Saran test yang hilang per perubahan"
     ],
     "metrics": [
-      "≥ 70% komentar dinilai berguna oleh kontributor",
-      "Biaya review < $0.05 per PR",
-      "Tidak ada komentar menyinggung kepribadian"
+      "≥ 70% komentar dinilai berguna oleh kontributor → bukti: survei singkat pasca-pakai 10 responden",
+      "Biaya review < $0.05 per PR → bukti: laporan biaya per run dari logger token",
+      "Tidak ada komentar menyinggung kepribadian → bukti: cek otomatis di setiap PR (lint/aturan repo)"
     ],
     "risks": [
       "Komentar berisik pada PR kecil",

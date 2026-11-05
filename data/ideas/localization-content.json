@@ -31,9 +31,9 @@
       "Mode review untuk penerjemah manusia"
     ],
     "metrics": [
-      "100% placeholder utuh",
-      "≥ 90% string lolos review manusia",
-      "Biaya < $0.01 per 100 string"
+      "100% placeholder utuh → bukti: cek otomatis di setiap PR (lint/aturan repo)",
+      "≥ 90% string lolos review manusia → bukti: laporan test & mutation di CI",
+      "Biaya < $0.01 per 100 string → bukti: laporan biaya per run dari logger token"
     ],
     "risks": [
       "Terjemahan tanpa konteks terasa kaku",

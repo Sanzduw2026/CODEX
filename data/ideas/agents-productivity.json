@@ -32,9 +32,9 @@
       "Integrasi Slack untuk konfirmasi"
     ],
     "metrics": [
-      "Precision action item ≥ 80%",
-      "0 duplikasi tiket",
-      "Review < 3 menit per rapat"
+      "Precision action item ≥ 80% → bukti: label emas 50+ kasus di folder eval",
+      "0 duplikasi tiket → bukti: rekonsiliasi otomatis di CI",
+      "Review < 3 menit per rapat → bukti: uji awal-sampai-selesai yang direkam"
     ],
     "risks": [
       "Nama & istilah salah dengar",
@@ -74,9 +74,9 @@
       "WhatsApp Business API"
     ],
     "metrics": [
-      "Waktu balas turun 50%",
-      "≥ 90% draf dipakai dengan sedikit edit",
-      "0 pelanggaran kebijakan toko"
+      "Waktu balas turun 50% → bukti: log latensi di suite uji beban",
+      "≥ 90% draf dipakai dengan sedikit edit → bukti: survei singkat pasca-pakai 10 responden",
+      "0 pelanggaran kebijakan toko → bukti: rekonsiliasi otomatis di CI"
     ],
     "risks": [
       "Janji yang tidak boleh dibuat model",
@@ -117,9 +117,9 @@
       "Dukungan bahasa campuran Indonesia–Inggris–daerah"
     ],
     "metrics": [
-      "≥ 80% pesanan terekstrak benar tanpa edit",
-      "0 pesanan terkirim tanpa konfirmasi",
-      "Waktu proses < 15 detik"
+      "≥ 80% pesanan terekstrak benar tanpa edit → bukti: sampel 50 item hasil model yang diaudit manual",
+      "0 pesanan terkirim tanpa konfirmasi → bukti: rekonsiliasi otomatis di CI",
+      "Waktu proses < 15 detik → bukti: uji awal-sampai-selesai yang direkam"
     ],
     "risks": [
       "Nomor/alamat salah ekstraksi",

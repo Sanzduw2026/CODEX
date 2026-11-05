@@ -32,9 +32,9 @@
       "Kalibrasi keyakinan terhadap review lawyer"
     ],
     "metrics": [
-      "Recall klausul risiko ≥ 85%",
-      "Semua temuan punya kutipan",
-      "False alarm < 15%"
+      "Recall klausul risiko ≥ 85% → bukti: label emas 50+ kasus di folder eval",
+      "100% temuan punya kutipan → bukti: label emas 50+ kasus di folder eval",
+      "False alarm < 15% → bukti: label emas 50+ kasus di folder eval"
     ],
     "risks": [
       "Kesalahan berdampak hukum",
