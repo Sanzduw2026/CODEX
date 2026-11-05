@@ -1,5 +1,11 @@
 # Ide Codex — generator ide proyek OpenAI acak
 
+[![CI](https://github.com/Sanzduw2026/CODEX/actions/workflows/ci.yml/badge.svg)](https://github.com/Sanzduw2026/CODEX/actions/workflows/ci.yml)
+[![Lisensi: MIT](https://img.shields.io/badge/lisensi-MIT-b8f24a)](LICENSE)
+[![Node](https://img.shields.io/badge/node-%3E%3D18-0b1020)](package.json)
+[![Dependensi: 0](https://img.shields.io/badge/dependensi-0-b8f24a)](package.json)
+[![Test: 36](https://img.shields.io/badge/test-36-b8f24a)](tests/)
+
 Repo ini bukan kumpulan tautan. Isinya **mesin ide**: 26 ide proyek OpenAI/Codex yang sudah dipikirkan
 sampai level MVP, bisa diputar acak lewat UI atau CLI, difilter, lalu diekspor menjadi brief Markdown/JSON/CSV
 yang siap kamu bawa ke Codex atau ke dokumen perencanaan.
@@ -18,7 +24,7 @@ Tanpa dependensi eksternal. Tanpa API key. Cukup Node.js 18+.
 
 ```bash
 git clone <repo-ini> && cd CODEX
-npm test          # 27 test, tanpa dependensi
+npm test          # 36 test, tanpa dependensi
 npm start         # UI di http://localhost:4173
 node cli.js       # satu ide acak di terminal
 ```
@@ -117,7 +123,23 @@ Aturan penulisan yang saya pakai: **satu ide = satu alur pengguna utama**, metri
 | [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md) | Perilaku yang diharapkan dan cara melapor |
 | [SECURITY.md](SECURITY.md) | Melaporkan kerentanan, model ancaman, saran deploy |
 | [docs/aplikasi-codex-oss.md](docs/aplikasi-codex-oss.md) | Kit aplikasi program *Codex for Open Source* (6 bulan ChatGPT Pro) |
+| [CHANGELOG.md](CHANGELOG.md) | Riwayat perubahan per rilis |
 | `.github/workflows/` | CI (Node 18/20/22) + validasi data pada PR |
+
+## Skrip pemeliharaan
+
+```bash
+npm run cek            # penguat katalog (--check) + seluruh test
+npm run perkaya        # tambahkan bukti verifikasi pada target yang belum punya
+npm run siap           # cek kesiapan repo untuk program Codex for Open Source
+npm run aplikasi       # regenerasi docs/aplikasi-*.md dari data terbaru
+npm run og             # regenerasi gambar sosial assets/og-image.svg
+```
+
+`npm run siap` memeriksa repo lewat GitHub API: publik/privat, Issues,
+Discussions, rilis, issue terbuka, aktivitas commit, bintang, dan lisensi.
+Setel `GITHUB_TOKEN` agar tidak terkena batas 60 permintaan/jam, dan tambahkan
+`--insecure` hanya bila mesinmu punya masalah sertifikat.
 
 ## Catatan
 

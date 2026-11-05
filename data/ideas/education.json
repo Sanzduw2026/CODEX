@@ -32,9 +32,9 @@
       "Impor kurikulum dari silabus"
     ],
     "metrics": [
-      "Kenaikan skor post-test ≥ 20%",
-      "Retensi 7 hari ≥ 70%",
-      "Biaya per sesi < $0.02"
+      "Kenaikan skor post-test ≥ 20% → bukti: laporan test & mutation di CI",
+      "Retensi 7 hari ≥ 70% → bukti: label emas 50+ kasus di folder eval",
+      "Biaya per sesi < $0.02 → bukti: laporan biaya per run dari logger token"
     ],
     "risks": [
       "Soal tidak akurat",
@@ -75,9 +75,9 @@
       "Umpan balik otomatis untuk jawaban esai"
     ],
     "metrics": [
-      "Biaya < $0.02 per paket 20 soal",
-      "≥ 95% soal lolos validasi otomatis",
-      "Guru hanya mengedit < 20% soal"
+      "Biaya < $0.02 per paket 20 soal → bukti: laporan biaya per run dari logger token",
+      "≥ 95% soal lolos validasi otomatis → bukti: label emas 50+ kasus di folder eval",
+      "Guru hanya mengedit < 20% soal → bukti: survei singkat pasca-pakai 10 responden"
     ],
     "risks": [
       "Soal ambigu atau kunci salah",

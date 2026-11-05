@@ -33,9 +33,9 @@
       "Mode 'red team' untuk prompt injection"
     ],
     "metrics": [
-      "Korelasi judge vs manusia ≥ 0.7",
-      "Satu run 100 task < 10 menit",
-      "Biaya per run tercatat akurat ±5%"
+      "Korelasi judge vs manusia ≥ 0.7 → bukti: rekonsiliasi otomatis di CI",
+      "Satu run 100 task < 10 menit → bukti: uji awal-sampai-selesai yang direkam",
+      "Biaya per run tercatat akurat ±5% → bukti: laporan biaya per run dari logger token"
     ],
     "risks": [
       "Judge bias ke jawaban panjang",
@@ -76,9 +76,9 @@
       "Ekspor laporan ke Slack mingguan"
     ],
     "metrics": [
-      "Overhead < 25 ms p95",
-      "Selisih hitungan biaya < 3%",
-      "Anggaran terlampaui tertahan 100%"
+      "Overhead < 25 ms p95 → bukti: log latensi di suite uji beban",
+      "Selisih hitungan biaya < 3% → bukti: laporan biaya per run dari logger token",
+      "Anggaran terlampaui tertahan 100% → bukti: cek otomatis di setiap PR (lint/aturan repo)"
     ],
     "risks": [
       "Token estimation tidak akurat",
@@ -119,9 +119,9 @@
       "A/B test rute secara aman"
     ],
     "metrics": [
-      "Penghematan biaya ≥ 40%",
-      "Penurunan kualitas ≤ 3% pada suite evaluasi",
-      "0 permintaan gagal karena fallback"
+      "Penghematan biaya ≥ 40% → bukti: laporan biaya per run dari logger token",
+      "Penurunan kualitas ≤ 3% pada suite evaluasi → bukti: label emas 50+ kasus di folder eval",
+      "0 permintaan gagal karena fallback → bukti: rekonsiliasi otomatis di CI"
     ],
     "risks": [
       "Router salah menilai tugas sulit",

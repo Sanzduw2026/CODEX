@@ -20,6 +20,17 @@ jobs:
       - name: Validasi skema ide
         run: node --test tests/ideas.test.js
 
+      - name: Penguat katalog (setiap target punya bukti verifikasi)
+        run: node scripts/perkaya.js --check
+
+      - name: Dokumen aplikasi masih sinkron
+        run: |
+          node scripts/aplikasi.js
+          git diff --exit-code docs/ || {
+            echo "::error::docs/aplikasi-*.md usang. Jalankan: npm run aplikasi"
+            exit 1
+          }
+
       - name: Pastikan ekspor markdown & csv berhasil
         run: |
           node cli.js --format md --out /tmp/brief.md

@@ -32,9 +32,9 @@
       "Cache semantik untuk pertanyaan berulang"
     ],
     "metrics": [
-      "Citation accuracy ≥ 95%",
-      "Penolakan tepat pada 20 pertanyaan jebakan",
-      "p95 latensi < 3 s"
+      "Citation accuracy ≥ 95% → bukti: label emas 50+ kasus di folder eval",
+      "Penolakan tepat pada 20 pertanyaan jebakan → bukti: label emas 50+ kasus di folder eval",
+      "p95 latensi < 3 s → bukti: log latensi di suite uji beban"
     ],
     "risks": [
       "Chunk memotong konteks penting",
@@ -76,9 +76,9 @@
       "Mode suara sederhana untuk aksesibilitas"
     ],
     "metrics": [
-      "Citation accuracy ≥ 95%",
-      "Jawaban 'tidak tahu' tepat pada 20 kasus di luar cakupan",
-      "Waktu muat < 2 s"
+      "Citation accuracy ≥ 95% → bukti: label emas 50+ kasus di folder eval",
+      "Jawaban 'tidak tahu' tepat pada 20 kasus di luar cakupan → bukti: sampel 50 item hasil model yang diaudit manual",
+      "Waktu muat < 2 s → bukti: uji awal-sampai-selesai yang direkam"
     ],
     "risks": [
       "Dokumen tidak resmi masuk indeks",

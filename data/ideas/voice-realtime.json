@@ -33,9 +33,9 @@
       "Escalation berbasis sentimen"
     ],
     "metrics": [
-      "Latensi balas < 800 ms p95",
-      "≥ 70% panggilan uji selesai tanpa manusia",
-      "0 double-booking"
+      "Latensi balas < 800 ms p95 → bukti: log latensi di suite uji beban",
+      "≥ 70% panggilan uji selesai tanpa manusia → bukti: sampel 50 item hasil model yang diaudit manual",
+      "0 double-booking → bukti: rekonsiliasi otomatis di CI"
     ],
     "risks": [
       "Kualitas audio jaringan buruk",
@@ -75,9 +75,9 @@
       "Ekspor ke Notion/Linear"
     ],
     "metrics": [
-      "≥ 95% entitas sensitif teredaksi",
-      "WER transkripsi < 15% pada audio jernih",
-      "0 audio mentah terunggah tanpa izin"
+      "≥ 95% entitas sensitif teredaksi → bukti: sampel 50 item hasil model yang diaudit manual",
+      "WER transkripsi < 15% pada audio jernih → bukti: sampel 50 item hasil model yang diaudit manual",
+      "0 audio mentah terunggah tanpa izin → bukti: rekonsiliasi otomatis di CI"
     ],
     "risks": [
       "Kinerja perangkat rendah",

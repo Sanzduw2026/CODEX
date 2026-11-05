@@ -32,9 +32,9 @@
       "Dashboard false positive per aturan"
     ],
     "metrics": [
-      "Recall ≥ 90% pada dataset serangan",
-      "False positive < 3%",
-      "Overhead < 40 ms p95"
+      "Recall ≥ 90% pada dataset serangan → bukti: label emas 50+ kasus di folder eval",
+      "False positive < 3% → bukti: label emas 50+ kasus di folder eval",
+      "Overhead < 40 ms p95 → bukti: log latensi di suite uji beban"
     ],
     "risks": [
       "Terlalu agresif memblokir pengguna sah",

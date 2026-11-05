@@ -32,9 +32,9 @@
       "Mode 'data provinsi/BPS' siap pakai"
     ],
     "metrics": [
-      "0 angka tanpa bukti eksekusi",
-      "Waktu analisis awal < 60 s",
-      "Sandbox tanpa akses jaringan"
+      "0 angka tanpa bukti eksekusi → bukti: rekonsiliasi otomatis di CI",
+      "Waktu analisis awal < 60 s → bukti: uji awal-sampai-selesai yang direkam",
+      "Sandbox tanpa akses jaringan → bukti: cek otomatis di setiap PR (lint/aturan repo)"
     ],
     "risks": [
       "Data sensitif di sandbox",
@@ -74,9 +74,9 @@
       "Mode offline dengan antrean unggah"
     ],
     "metrics": [
-      "Akurasi total nominal ≥ 97%",
-      "Waktu input per struk < 20 detik",
-      "Biaya < $0.005 per struk"
+      "Akurasi total nominal ≥ 97% → bukti: label emas 50+ kasus di folder eval",
+      "Waktu input per struk < 20 detik → bukti: uji awal-sampai-selesai yang direkam",
+      "Biaya < $0.005 per struk → bukti: laporan biaya per run dari logger token"
     ],
     "risks": [
       "Total terbaca salah pada struk pudar",
@@ -117,9 +117,9 @@
       "Penjelasan berbahasa Indonesia untuk manajer non-teknis"
     ],
     "metrics": [
-      "≥ 70% anomali sintetis terjelaskan benar",
-      "0 query destruktif",
-      "Waktu investigasi < 2 menit"
+      "≥ 70% anomali sintetis terjelaskan benar → bukti: label emas 50+ kasus di folder eval",
+      "0 query destruktif → bukti: rekonsiliasi otomatis di CI",
+      "Waktu investigasi < 2 menit → bukti: uji awal-sampai-selesai yang direkam"
     ],
     "risks": [
       "Korelasi disalahartikan sebagai sebab",
