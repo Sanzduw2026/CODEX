@@ -5,6 +5,14 @@ Format mengikuti [Keep a Changelog](https://keepachangelog.com/id/1.1.0/) dan
 
 ## [Belum dirilis]
 
+### Direncanakan
+
+- Lint isi katalog lebih lengkap (risiko terlalu umum, `openaiFeatures` tanpa
+  jejak di MVP) — lihat `docs/ROADMAP.md`.
+- Tangkapan layar UI di README.
+
+## [1.1.0] — 2026-11-04
+
 ### Ditambahkan
 
 - `scripts/perkaya.js` — menambahkan bukti verifikasi pada setiap target terukur
@@ -14,6 +22,7 @@ Format mengikuti [Keep a Changelog](https://keepachangelog.com/id/1.1.0/) dan
   issue terbuka, aktivitas commit, bintang, lisensi).
 - 7 test baru: idempotensi penguat katalog, kelengkapan bukti metrik, dan
   logika pemeriksaan kesiapan (total 36 test).
+- Badge README, `CHANGELOG.md`, dan script npm `cek`/`perkaya`/`siap`/`og`.
 
 ### Diubah
 
@@ -21,6 +30,8 @@ Format mengikuti [Keep a Changelog](https://keepachangelog.com/id/1.1.0/) dan
   laporan biaya, uji latensi, lint PR, dan seterusnya).
 - 4 target dipertegas agar dapat diukur: test render komponen, CI hijau per PR,
   regresi versi lama/baru, dan kutipan temuan kontrak.
+- CI menjalankan `perkaya --check` dan menolak PR yang meninggalkan dokumen
+  aplikasi usang.
 
 ## [1.0.0] — 2026-11-04
 
