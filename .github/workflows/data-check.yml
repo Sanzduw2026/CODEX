@@ -23,6 +23,9 @@ jobs:
       - name: Penguat katalog (setiap target punya bukti verifikasi)
         run: node scripts/perkaya.js --check
 
+      - name: Lint mutu isi (risiko, metrik, ringkasan)
+        run: npm run lint:data
+
       - name: Dokumen aplikasi masih sinkron
         run: |
           node scripts/aplikasi.js

@@ -123,7 +123,7 @@
     ],
     "risks": [
       "Test rapuh terhadap implementasi",
-      "Banjir PR"
+      "PR yang dihasilkan terlalu banyak sekaligus membanjiri antrean review maintainer"
     ],
     "prompt": "Tulis test untuk fungsi berikut. Test harus gagal jika logika berubah (hindari assertion trivial). Gunakan gaya test yang sudah ada di repo. Jelaskan skenario yang tidak bisa dites tanpa refactor."
   },

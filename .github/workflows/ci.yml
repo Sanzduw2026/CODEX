@@ -35,6 +35,9 @@ jobs:
       - name: Penguat katalog (bukti metrik)
         run: node scripts/perkaya.js --check
 
+      - name: Lint isi katalog
+        run: npm run lint:data
+
       - name: Jalankan test
         run: npm test
 

@@ -1,6 +1,6 @@
 {
   "name": "ide-codex",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "private": true,
   "description": "Generator ide proyek OpenAI/Codex secara acak — katalog terkurasi (26 ide), CLI, API lokal, dan UI tanpa dependensi.",
   "main": "server.js",
@@ -19,7 +19,8 @@
     "perkaya:check": "node scripts/perkaya.js --check",
     "siap": "node scripts/siap-aplikasi.js",
     "og": "node scripts/og-image.js",
-    "cek": "node scripts/perkaya.js --check && npm test"
+    "cek": "node scripts/perkaya.js --check && node scripts/lint-data.js && npm test",
+    "lint:data": "node scripts/lint-data.js"
   },
   "engines": {
     "node": ">=18"

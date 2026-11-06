@@ -38,7 +38,7 @@
     ],
     "risks": [
       "Chunk memotong konteks penting",
-      "Dokumen usang"
+      "Dokumen sumber usang sehingga jawaban benar menurut arsip, salah menurut aturan berlaku"
     ],
     "prompt": "Jawab HANYA dari konteks yang diberikan. Sertakan id kutipan untuk setiap klaim. Jika konteks tidak memadai, kembalikan answer=null dan alasan singkat. Jangan menebak."
   },

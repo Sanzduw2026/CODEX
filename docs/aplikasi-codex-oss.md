@@ -23,7 +23,7 @@ Program meninjau **secara bergilir (rolling)**. Mengajukan tidak menjamin diteri
 | Repositori publik | ✅ `https://github.com/Sanzduw2026/CODEX` |
 | Profil GitHub publik | ⚠️ atur visibilitas profil ke publik |
 | Bukti pemeliharaan aktif | ✅ riwayat commit, CI, issue/PR template |
-| Kualitas teknis dapat diaudit | ✅ nol dependensi, 36 test, CI Node 18/20/22 |
+| Kualitas teknis dapat diaudit | ✅ nol dependensi, 46 test, CI Node 18/20/22 |
 | Dokumentasi kontribusi | ✅ CONTRIBUTING, CODE_OF_CONDUCT, SECURITY, README |
 | Penggunaan/ekosistem | 🔸 isi dengan angka nyata: star, fork, unduhan, pengguna |
 | Peran maintainer | ✅ primary maintainer |
@@ -42,7 +42,7 @@ Primary maintainer
 ### Why does this repository qualify? (379/500 karakter)
 
 ```text
-Ide Codex (26 ide proyek OpenAI/Codex, 11 kategori) adalah generator ide yang bisa diputar acak lewat CLI dan API HTTP, lalu diekspor jadi brief Markdown/JSON/CSV. Nol dependensi npm, 36 test otomatis, CI di Node 18/20/22, dokumentasi kontribusi lengkap. Ditujukan untuk developer yang ingin mulai proyek OpenAI tanpa menghabiskan waktu memilih. Semua konten berbahasa Indonesia.
+Ide Codex (26 ide proyek OpenAI/Codex, 11 kategori) adalah generator ide yang bisa diputar acak lewat CLI dan API HTTP, lalu diekspor jadi brief Markdown/JSON/CSV. Nol dependensi npm, 46 test otomatis, CI di Node 18/20/22, dokumentasi kontribusi lengkap. Ditujukan untuk developer yang ingin mulai proyek OpenAI tanpa menghabiskan waktu memilih. Semua konten berbahasa Indonesia.
 ```
 
 ### I'm interested in...
@@ -61,7 +61,7 @@ Kredit API untuk otomasi pemeliharaan: memvalidasi ide baru lewat Codex sebelum 
 ### Anything else we should know? (349/500 karakter)
 
 ```text
-Repo kecil dengan satu maintainer, tumbuh dari 14 menjadi 26 ide dalam beberapa hari terakhir. Arsitektur sengaja tanpa dependensi agar mudah diaudit dan direplikasi. Ada CONTRIBUTING, CODE_OF_CONDUCT, SECURITY, template issue/PR, dan 36 test berjalan di CI. Fokus berikutnya: menambah ide dari komunitas dan menjaga kualitas metrik/risiko tiap ide.
+Repo kecil dengan satu maintainer, tumbuh dari 14 menjadi 26 ide dalam beberapa hari terakhir. Arsitektur sengaja tanpa dependensi agar mudah diaudit dan direplikasi. Ada CONTRIBUTING, CODE_OF_CONDUCT, SECURITY, template issue/PR, dan 46 test berjalan di CI. Fokus berikutnya: menambah ide dari komunitas dan menjaga kualitas metrik/risiko tiap ide.
 ```
 
 ## Data yang harus kamu isi sendiri

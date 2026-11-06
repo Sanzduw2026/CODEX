@@ -21,8 +21,9 @@ Legenda: `[ ]` belum dimulai · `[~]` sedang dikerjakan · `[x]` selesai
 - [ ] **Skor kelayakan ide** — setiap ide dinilai pada 4 sumbu: kejelasan masalah,
       ketajaman metrik, keterujian, dan risiko; skor dihitung dari aturan sederhana
       (bukan model) agar bisa diaudit.
-- [ ] **Lint isi** — peringatkan metrik tanpa angka, risiko yang terlalu umum,
-      prompt di bawah 40 karakter, atau `openaiFeatures` yang tidak dipakai di MVP.
+- [x] **Lint isi** — `scripts/lint-data.js`: metrik tanpa angka, risiko terlalu
+      umum, ringkasan/prompt tipis, duplikasi stack/fitur, judul kembar.
+- [ ] **Jejak fitur** — peringatkan `openaiFeatures` yang tidak muncul di MVP/ringkasan.
 - [ ] **Target 50 ide** dengan minimal 3 ide per kategori.
 - [ ] Rujukan silang antar ide ("mirip dengan", "prasyarat untuk").
 - [ ] Riwayat perubahan katalog (`CHANGELOG.md` per rilis).

@@ -3,8 +3,9 @@
 [![CI](https://github.com/Sanzduw2026/CODEX/actions/workflows/ci.yml/badge.svg)](https://github.com/Sanzduw2026/CODEX/actions/workflows/ci.yml)
 [![Lisensi: MIT](https://img.shields.io/badge/lisensi-MIT-b8f24a)](LICENSE)
 [![Node](https://img.shields.io/badge/node-%3E%3D18-0b1020)](package.json)
+[![Versi: 1.2.0](https://img.shields.io/badge/versi-1.2.0-b8f24a)](CHANGELOG.md)
 [![Dependensi: 0](https://img.shields.io/badge/dependensi-0-b8f24a)](package.json)
-[![Test: 36](https://img.shields.io/badge/test-36-b8f24a)](tests/)
+[![Test: 46](https://img.shields.io/badge/test-46-b8f24a)](tests/)
 
 Repo ini bukan kumpulan tautan. Isinya **mesin ide**: 26 ide proyek OpenAI/Codex yang sudah dipikirkan
 sampai level MVP, bisa diputar acak lewat UI atau CLI, difilter, lalu diekspor menjadi brief Markdown/JSON/CSV
@@ -24,7 +25,7 @@ Tanpa dependensi eksternal. Tanpa API key. Cukup Node.js 18+.
 
 ```bash
 git clone <repo-ini> && cd CODEX
-npm test          # 36 test, tanpa dependensi
+npm test          # 46 test, tanpa dependensi
 npm start         # UI di http://localhost:4173
 node cli.js       # satu ide acak di terminal
 ```
@@ -129,7 +130,8 @@ Aturan penulisan yang saya pakai: **satu ide = satu alur pengguna utama**, metri
 ## Skrip pemeliharaan
 
 ```bash
-npm run cek            # penguat katalog (--check) + seluruh test
+npm run cek            # penguat katalog + lint isi + seluruh test
+npm run lint:data      # lint mutu isi: risiko umum, metrik tanpa angka, ringkasan tipis
 npm run perkaya        # tambahkan bukti verifikasi pada target yang belum punya
 npm run siap           # cek kesiapan repo untuk program Codex for Open Source
 npm run aplikasi       # regenerasi docs/aplikasi-*.md dari data terbaru
