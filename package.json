@@ -19,7 +19,8 @@
     "perkaya:check": "node scripts/perkaya.js --check",
     "siap": "node scripts/siap-aplikasi.js",
     "og": "node scripts/og-image.js",
-    "cek": "node scripts/perkaya.js --check && npm test"
+    "cek": "node scripts/perkaya.js --check && node scripts/lint-data.js && npm test",
+    "lint:data": "node scripts/lint-data.js"
   },
   "engines": {
     "node": ">=18"

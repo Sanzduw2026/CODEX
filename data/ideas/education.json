@@ -37,7 +37,7 @@
       "Biaya per sesi < $0.02 → bukti: laporan biaya per run dari logger token"
     ],
     "risks": [
-      "Soal tidak akurat",
+      "Soal yang dihasilkan keliru konsepnya dan lolos tanpa validasi pengguna",
       "Memory menggelembung dan makin mahal"
     ],
     "prompt": "Buat soal untuk konsep X pada level Y. Sertakan jawaban benar, rubrik, dan satu miskonsepsi umum yang harus dideteksi. Kembalikan JSON sesuai schema."
@@ -81,7 +81,7 @@
     ],
     "risks": [
       "Soal ambigu atau kunci salah",
-      "Materi berhak cipta"
+      "Materi berhak cipta diunggah tanpa izin dan dipakai sebagai sumber soal"
     ],
     "prompt": "Buat soal pilihan ganda untuk konsep berikut pada level yang diminta. Setiap soal: pertanyaan, 4 opsi, kunci, pembahasan 2 kalimat, dan konsep yang diuji. Hindari jebakan yang menguji bacaan, bukan pemahaman."
   }

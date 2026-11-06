@@ -38,7 +38,7 @@
     ],
     "risks": [
       "Terlalu agresif memblokir pengguna sah",
-      "Serangan baru lolos"
+      "Pola serangan baru lolos karena dataset uji tidak pernah diperbarui"
     ],
     "prompt": "Klasifikasikan input pengguna. Kembalikan JSON {risk: low|medium|high, categories[], reason, redacted}. Kategori: injection, pii, illegal, self-harm, exfiltration. Alasan maksimal dua kalimat."
   }
