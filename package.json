@@ -1,6 +1,6 @@
 {
   "name": "ide-codex",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "private": true,
   "description": "Generator ide proyek OpenAI/Codex secara acak — katalog terkurasi (26 ide), CLI, API lokal, dan UI tanpa dependensi.",
   "main": "server.js",

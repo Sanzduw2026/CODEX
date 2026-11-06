@@ -3,6 +3,7 @@
 [![CI](https://github.com/Sanzduw2026/CODEX/actions/workflows/ci.yml/badge.svg)](https://github.com/Sanzduw2026/CODEX/actions/workflows/ci.yml)
 [![Lisensi: MIT](https://img.shields.io/badge/lisensi-MIT-b8f24a)](LICENSE)
 [![Node](https://img.shields.io/badge/node-%3E%3D18-0b1020)](package.json)
+[![Versi: 1.2.0](https://img.shields.io/badge/versi-1.2.0-b8f24a)](CHANGELOG.md)
 [![Dependensi: 0](https://img.shields.io/badge/dependensi-0-b8f24a)](package.json)
 [![Test: 46](https://img.shields.io/badge/test-46-b8f24a)](tests/)
 
