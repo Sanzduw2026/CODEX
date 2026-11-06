@@ -87,10 +87,16 @@ async function periksa(repo, token) {
       : 'belum ada rilis — buat v1.0.0 untuk sinyal pemeliharaan');
 
   const issuesArr = Array.isArray(issues) ? issues : [];
-  const realIssues = issuesArr.filter((i) => !i.pull_request);
+  const realIssues = issuesArr.filter((i) => !i.pull_request && i.state === 'open');
+  const closedIssues = issuesArr.filter((i) => !i.pull_request && i.state === 'closed');
   const prs = issuesArr.filter((i) => i.pull_request);
   add(false, realIssues.length ? 'ok' : 'warn', 'Issue terbuka',
     realIssues.length ? `${realIssues.length} issue` : 'belum ada issue — satu issue roadmap membantu');
+
+  add(false, closedIssues.length ? 'ok' : 'warn', 'Issue terselesaikan',
+    closedIssues.length
+      ? `${closedIssues.length} issue ditutup (bukti siklus kerja)`
+      : 'belum ada issue yang ditutup — selesaikan satu issue untuk bukti siklus kerja');
 
   add(false, prs.length >= 1 ? 'ok' : 'warn', 'Aktivitas PR',
     `${prs.length} PR (termasuk yang sudah merged)`);
